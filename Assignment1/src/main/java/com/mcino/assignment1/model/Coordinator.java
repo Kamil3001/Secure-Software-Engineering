@@ -1,6 +1,7 @@
 package com.mcino.assignment1.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -10,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "coordinators")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class Coordinator extends User {
 
     @OneToMany(mappedBy = "coordinatorId")
