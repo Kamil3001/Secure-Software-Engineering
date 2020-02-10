@@ -16,18 +16,15 @@ public abstract class User {
 
     @NotNull
     @Pattern(regexp = "^[\\p{L}’\\-]+$")
-    String name;
+    private String name;
 
     @NotNull
     @Pattern(regexp = "^[\\p{L}’\\-]+$")
-    String surname;
+    private String surname;
 
     @NotNull
-    @Pattern(regexp = "^[\\p{Alnum}]")
-    String username;
-
-    @NotNull
-    @Pattern(regexp = "^[\\p{Alnum}]")
-    String password;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username", referencedColumnName = "username")
+    private Credential credential;
 
 }

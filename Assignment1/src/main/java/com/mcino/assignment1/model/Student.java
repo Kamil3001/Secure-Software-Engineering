@@ -14,14 +14,14 @@ import java.util.Set;
 public class Student extends User {
 
     @NotNull
-    String email;
+    private String email;
 
     @NotNull
-    String address;
+    private String address;
 
     @NotNull
-    boolean isFeePaid;
+    private boolean isFeePaid;
 
     @ManyToMany(mappedBy = "enrolledStudents")
-    Set<Module> chosenModules;
+    private Set<Module> chosenModules;
 }

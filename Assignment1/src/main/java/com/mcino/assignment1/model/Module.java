@@ -13,23 +13,23 @@ public class Module {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private long id;
 
     @NotNull
-    String name;
+    private String name;
 
     @NotNull
-    int coordinatorId;
+    private long coordinatorId;
 
     @NotNull
-    String topics;
+    private String topics;
 
     @NotNull
-    boolean isTerminated;
+    private boolean isTerminated;
 
     @NotNull
-    int capacity;
+    private int capacity;
 
     @ManyToMany
-    Set<Student> enrolledStudents;
+    private Set<Student> enrolledStudents;
 }
