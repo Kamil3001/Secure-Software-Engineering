@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,8 +21,11 @@ public class Student extends User {
     private String address;
 
     @NotNull
+    private String phoneNum;
+
+    @NotNull
     private boolean isFeePaid;
 
-    @ManyToMany(mappedBy = "enrolledStudents")
-    private Set<Module> chosenModules;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private Set<StudentModule> studentModules = new HashSet<>();
 }

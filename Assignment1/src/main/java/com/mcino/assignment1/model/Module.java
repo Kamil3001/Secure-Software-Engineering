@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -30,6 +31,6 @@ public class Module {
     @NotNull
     private int capacity;
 
-    @ManyToMany
-    private Set<Student> enrolledStudents;
+    @OneToMany(mappedBy = "module", cascade = CascadeType.ALL)
+    private Set<StudentModule> studentModules = new HashSet<>();
 }
