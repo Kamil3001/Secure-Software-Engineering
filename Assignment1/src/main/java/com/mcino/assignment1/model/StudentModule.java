@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Data
+@IdClass(StudentModuleId.class)
 public class StudentModule implements Serializable {
 
     @Id
