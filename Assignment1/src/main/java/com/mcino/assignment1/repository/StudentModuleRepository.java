@@ -11,4 +11,5 @@ import java.util.List;
 public interface StudentModuleRepository extends JpaRepository<StudentModule, Long>, JpaSpecificationExecutor<StudentModule> {
     List<StudentModule> findByStudentId(Long studentId);
     List<StudentModule> findByModuleId(Long moduleId);
+    StudentModule findByStudentIdAndModuleId(Long studentId, Long moduleId);
 }

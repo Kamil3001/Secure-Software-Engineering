@@ -1,5 +1,6 @@
 package com.mcino.assignment1.controller;
 
+import com.mcino.assignment1.exception.StudentModuleNotFoundException;
 import com.mcino.assignment1.model.StudentModule;
 import com.mcino.assignment1.repository.StudentModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,17 @@ public class StudentModuleController {
         // todo try and figure out a way to remove entry from the join table
     }
 
-    // todo add a way to input grades
+    @PutMapping("grades/{module_id}/update/{student_id}")
+    public StudentModule updateGrade(@PathVariable(value = "module_id") Long moduleId,
+                            @PathVariable(value = "student_id") Long studentId,
+                            @Valid @RequestBody String grade) throws StudentModuleNotFoundException {
+        StudentModule studentModule = studentModuleRepository.findByStudentIdAndModuleId(studentId, moduleId);
+        if (studentModule == null)
+            throw new StudentModuleNotFoundException(studentId, moduleId);
+
+        System.out.println(studentModule);
+        studentModule.setGrade(grade);
+        System.out.println(studentModule);
+        return studentModuleRepository.save(studentModule);
+    }
 }

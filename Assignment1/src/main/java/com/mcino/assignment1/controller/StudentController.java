@@ -39,7 +39,7 @@ public class StudentController {
                 .orElseThrow(() -> new StudentNotFoundException(studentId));
     }
 
-    @PutMapping("{id}/payFees/")
+    @PutMapping("{id}/payFees")
     public Student updateFees(@PathVariable(value = "id") Long studentId) throws StudentNotFoundException {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new StudentNotFoundException(studentId));
@@ -48,7 +48,7 @@ public class StudentController {
         return studentRepository.save(student);
     }
 
-    @GetMapping("{id}/moduleList/")
+    @GetMapping("{id}/moduleList")
     public Set<StudentModule> getStudentsModules(@PathVariable(value = "id") Long studentId) throws StudentNotFoundException {
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new StudentNotFoundException(studentId));

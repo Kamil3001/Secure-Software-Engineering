@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ import java.util.Set;
 @Table(name = "students")
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Student extends User {
+public class Student extends User implements Serializable {
 
     @NotNull
     private String email;

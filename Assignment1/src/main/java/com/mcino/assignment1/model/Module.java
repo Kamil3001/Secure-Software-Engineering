@@ -7,13 +7,14 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "modules")
 @Data
-public class Module {
+public class Module implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

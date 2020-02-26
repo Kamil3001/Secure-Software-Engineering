@@ -7,11 +7,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "credentials")
 @Data
-public class Credential {
+public class Credential implements Serializable {
 
     @Id
     @Pattern(regexp = "^[\\p{Alnum}]{8,}$")
