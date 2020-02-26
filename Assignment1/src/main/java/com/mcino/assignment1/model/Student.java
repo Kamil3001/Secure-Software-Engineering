@@ -1,7 +1,9 @@
 package com.mcino.assignment1.model;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -26,6 +28,9 @@ public class Student extends User {
     @NotNull
     private boolean isFeePaid;
 
+    @ToString.Exclude
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<StudentModule> studentModules = new HashSet<>();
 }

@@ -1,6 +1,9 @@
 package com.mcino.assignment1.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -31,6 +34,25 @@ public class Module {
     @NotNull
     private int capacity;
 
+    @ToString.Exclude
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "module", cascade = CascadeType.ALL)
-    private Set<StudentModule> studentModules = new HashSet<>();
+    private Set<StudentModule> moduleStudents = new HashSet<>();
+
+    public void addStudent(Student student) {
+        StudentModule studentModule = new StudentModule();
+        studentModule.setStudent(student);
+        studentModule.setModule(this);
+        moduleStudents.add(studentModule);
+    }
+
+//    public void removeStudent(Student student) {
+//        StudentModule studentModule = new StudentModule();
+//        studentModule.setStudent(student);
+//        studentModule.setModule(this);
+//        moduleStudents.remove(studentModule);
+//        student.getStudentModules().remove(studentModule);
+//
+//    }
 }

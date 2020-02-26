@@ -25,6 +25,6 @@ public abstract class User {
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")
-    private Credential credential;
+    private Credential credentials;
 
 }

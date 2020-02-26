@@ -14,7 +14,7 @@ import javax.validation.constraints.Pattern;
 public class Credential {
 
     @Id
-    @Pattern(regexp = "^[\\p{Alnum}]")
+    @Pattern(regexp = "^[\\p{Alnum}]{8,}$")
     private String username;
 
     @NotNull
