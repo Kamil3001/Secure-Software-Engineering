@@ -20,41 +20,40 @@ public class RegisterController {
     @Autowired
     RegistrationService service;
 
-    @RequestMapping(value="/register", method = RequestMethod.GET)
+    @GetMapping(value="register")
     public String showRegistrationPage(ModelMap model){
         return "register";
     }
 
-    @RequestMapping(value="/register", method = RequestMethod.POST)
+    @PostMapping(value="register")
     public String showLoginPage(ModelMap model, @RequestParam String username, @RequestParam String password,
                                 @RequestParam String name,
                                 @RequestParam String surname,
-                                @RequestParam String student_id,
+                                @RequestParam String studentid,
                                 @RequestParam String address,
-                                @RequestParam String phone_number,
+                                @RequestParam String phonenumber,
                                 @RequestParam String email){
 
-        FormValidationInformation fvi;
-        if(!(fvi = service.check(username, password, name, surname, student_id, address, phone_number, email)).isValid()){
+        FormValidationInformation fvi = service.check(username, password, name, surname, studentid, address, phonenumber, email);
+        if(!fvi.isValid()){
             model.put("error", fvi.getMessage());
             return "register";
-        }/*else{
-            model.put("success", fvi.getMessage()); // fix using redirect attributes
-        }*/
+        }
+        //else{model.put("success", fvi.getMessage()); // fix using redirect attributes}
 
         Credential newCredentials = new Credential();
         newCredentials.setUsername(username);
         newCredentials.setPassword(password);
 
         Student newStudent = new Student();
-        newStudent.setId(Long.parseLong(student_id));
+        newStudent.setId(Long.parseLong(studentid));
         newStudent.setCredentials(newCredentials);
         newStudent.setName(name);
         newStudent.setSurname(surname);
         newStudent.setEmail(email);
         newStudent.setFeePaid(false);
         newStudent.setAddress(address);
-        newStudent.setPhoneNum(phone_number);
+        newStudent.setPhoneNum(phonenumber);
 
         studentRepository.save(newStudent);
 

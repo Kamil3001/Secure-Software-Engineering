@@ -21,13 +21,13 @@ public class RegistrationService {
 
     public FormValidationInformation check(String username,  String password, String name,
                            String surname,
-                           String student_id,
+                           String studentid,
                            String address,
-                           String phone_number,
+                           String phonenumber,
                            String email){
 
         FormValidationInformation fvi = new FormValidationInformation();
-        
+
         String nameRegex = "^[\\p{L}’\\-]+$";
         String usernameRegex = "^[\\p{Alnum}]{8,}$"; // alphanumeric with at least 8 characters
         String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!?])(?=\\S+$).{8,}$"; // at least one digit
@@ -61,13 +61,13 @@ public class RegistrationService {
             fvi.setValid(false);
             fvi.setMessage("Some fields are empty");
             return fvi;
-        }else if(phone_number.length() < 10){
+        }else if(phonenumber.length() < 10){
             fvi.setValid(false);
             fvi.setMessage("Invalid phone number");
         }
 
         try {
-            Long.parseLong(student_id);
+            Long.parseLong(studentid);
         }catch(Exception e){
             fvi.setValid(false);
             fvi.setMessage("Invalid student ID, make sure it consists of digits only");
@@ -75,7 +75,7 @@ public class RegistrationService {
         }
 
         //All information is valid, now check if some entries already exist
-        Optional<Student> existingStudentId = studentRepository.findById(Long.parseLong(student_id));
+        Optional<Student> existingStudentId = studentRepository.findById(Long.parseLong(studentid));
         Student existingEmail = studentRepository.findByEmail(email);
         Credential existingUsername = credentialsRepository.findByUsername(username);
 

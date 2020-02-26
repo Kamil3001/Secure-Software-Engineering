@@ -13,14 +13,14 @@ public class LoginController {
     @Autowired
     LoginService service;
 
-    @RequestMapping(value="/", method = RequestMethod.GET)
+    @GetMapping(value="/")
     public String showLoginPage(ModelMap model){
         return "login";
     }
 
-    @RequestMapping(value="/", method = RequestMethod.POST)
+    @PostMapping(value="/")
     public String showHomePage(ModelMap model, @RequestParam String username,
-                                  @RequestParam String password){
+                               @RequestParam String password){
         boolean isValid = service.validateUser(username, password);
 
         if(!isValid){
