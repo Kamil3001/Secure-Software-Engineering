@@ -4,9 +4,9 @@ import com.mcino.assignment1.exception.StudentModuleNotFoundException;
 import com.mcino.assignment1.model.StudentModule;
 import com.mcino.assignment1.repository.StudentModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
@@ -16,9 +16,6 @@ public class StudentModuleController {
 
     @Autowired
     StudentModuleRepository studentModuleRepository;
-
-    @Autowired
-    EntityManager em;
 
     @GetMapping("/grades/student/{id}")
     public List<StudentModule> getStudentGrades(@PathVariable(value = "id") Long studentId) {
@@ -31,19 +28,12 @@ public class StudentModuleController {
     }
 
     @Transactional
-    @PostMapping("modules/{id}/drop")
-    public void unEnrollFromModule(@PathVariable(value = "id") Long moduleId,
-                                   @Valid @RequestBody Long studentId) {
-//        Student student = em.getReference(Student.class, studentId);
-//        Module module = em.getReference(Module.class, moduleId);
-//        module.removeStudent(student);
-//        em.persist(student);
-//        em.persist(module);
-//        StudentModule studentModule = new StudentModule();
-//        studentModule.setStudent(student);
-//        studentModule.setModule(module);
-//        studentModuleRepository.delete(studentModule);
-        // todo try and figure out a way to remove entry from the join table
+    @DeleteMapping("students/{student_id}/drop/{module_id}")
+    public ResponseEntity<?> unEnrollFromModule(@PathVariable(value = "module_id") Long moduleId,
+                                                @PathVariable(value = "student_id") Long studentId) {
+        StudentModule studentModule = studentModuleRepository.findByStudentIdAndModuleId(studentId, moduleId);
+        studentModuleRepository.delete(studentModule);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("grades/{module_id}/update/{student_id}")
@@ -54,9 +44,7 @@ public class StudentModuleController {
         if (studentModule == null)
             throw new StudentModuleNotFoundException(studentId, moduleId);
 
-        System.out.println(studentModule);
         studentModule.setGrade(grade);
-        System.out.println(studentModule);
         return studentModuleRepository.save(studentModule);
     }
 }

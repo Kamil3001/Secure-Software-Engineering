@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,27 +17,22 @@ import java.util.Set;
 @Data
 public class Module implements Serializable {
 
+    private long coordinatorId;
+    private boolean isTerminated;
+    private int capacity;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
+    @NotEmpty
     private String name;
-
-    @NotNull
-    private long coordinatorId;
 
     @NotNull
     private String topics;
 
-    @NotNull
-    private boolean isTerminated;
-
-    @NotNull
-    private int capacity;
-
     @ToString.Exclude
-    @JsonIgnore
+//    @JsonIgnore
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "module", cascade = CascadeType.ALL)
     private Set<StudentModule> moduleStudents = new HashSet<>();
@@ -44,16 +40,9 @@ public class Module implements Serializable {
     public void addStudent(Student student) {
         StudentModule studentModule = new StudentModule();
         studentModule.setStudent(student);
+        studentModule.setStudentId(student.getId());
         studentModule.setModule(this);
+        studentModule.setModuleId(this.id);
         moduleStudents.add(studentModule);
     }
-
-//    public void removeStudent(Student student) {
-//        StudentModule studentModule = new StudentModule();
-//        studentModule.setStudent(student);
-//        studentModule.setModule(this);
-//        moduleStudents.remove(studentModule);
-//        student.getStudentModules().remove(studentModule);
-//
-//    }
 }

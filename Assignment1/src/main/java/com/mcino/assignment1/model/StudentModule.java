@@ -1,9 +1,6 @@
 package com.mcino.assignment1.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,11 +13,11 @@ public class StudentModule implements Serializable {
 
     @Id
     @Column(name = "student_id")
-    private Long studentId;
+    private long studentId;
 
     @Id
     @Column(name = "module_id")
-    private Long moduleId;
+    private long moduleId;
 
     @ManyToOne
     @JoinColumn(name = "student_id", insertable = false, updatable = false)

@@ -1,12 +1,14 @@
 package com.mcino.assignment1.model;
 
-import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -17,21 +19,29 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class Student extends User implements Serializable {
 
-    @NotNull
+    @NotEmpty
     private String email;
 
-    @NotNull
+    @NotEmpty
     private String address;
 
-    @NotNull
+    @NotEmpty
     private String phoneNum;
 
-    @NotNull
     private boolean isFeePaid;
 
     @ToString.Exclude
-    @JsonIgnore
+//    @JsonIgnore
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<StudentModule> studentModules = new HashSet<>();
+
+    public void addModule(Module module) {
+        StudentModule studentModule = new StudentModule();
+        studentModule.setModule(module);
+        studentModule.setModuleId(module.getId());
+        studentModule.setStudent(this);
+        studentModule.setStudentId(this.getId());
+        studentModules.add(studentModule);
+    }
 }

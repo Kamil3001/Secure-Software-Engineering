@@ -6,6 +6,6 @@ import java.io.Serializable;
 
 @Data
 public class StudentModuleId implements Serializable {
-    private Long studentId;
-    private Long moduleId;
+    private long studentId;
+    private long moduleId;
 }
