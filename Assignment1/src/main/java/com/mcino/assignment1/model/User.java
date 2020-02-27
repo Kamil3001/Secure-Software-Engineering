@@ -9,10 +9,10 @@ import java.io.Serializable;
 
 @MappedSuperclass
 @Data
-public abstract class User implements Serializable {
+abstract class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotEmpty
