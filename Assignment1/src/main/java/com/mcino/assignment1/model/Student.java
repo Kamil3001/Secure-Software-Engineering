@@ -35,13 +35,4 @@ public class Student extends User implements Serializable {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private Set<StudentModule> studentModules = new HashSet<>();
-
-    public void addModule(Module module) {
-        StudentModule studentModule = new StudentModule();
-        studentModule.setModule(module);
-        studentModule.setModuleId(module.getId());
-        studentModule.setStudent(this);
-        studentModule.setStudentId(this.getId());
-        studentModules.add(studentModule);
-    }
 }
