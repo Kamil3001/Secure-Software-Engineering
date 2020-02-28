@@ -20,10 +20,11 @@
         </div>
         <div id="menubar">
             <ul id="menu">
-                <li class="selected"><a href="home">Home</a></li>
-                <li><a href="statistics">Statistics</a></li>
+                <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+                <li ><a href="home">Home</a></li>
+                <li ><a href="statistics">Statistics</a></li>
                 <li ><a href="view_modules">Modules</a></li>
-                <li><a href="my_profile">My Profile</a></li>
+                <li class="selected"><a href="my_profile">My Profile</a></li>
                 <li ><a href="staff">Staff Only</a></li>
                 <li ><a href="login">Login</a></li>
             </ul>

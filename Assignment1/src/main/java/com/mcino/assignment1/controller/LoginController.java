@@ -13,12 +13,12 @@ public class LoginController {
     @Autowired
     LoginService service;
 
-    @GetMapping(value="/")
+    @GetMapping(value="/login")
     public String showLoginPage(ModelMap model){
         return "login";
     }
 
-    @PostMapping(value="/")
+    @PostMapping(value="/login")
     public String showHomePage(ModelMap model, @RequestParam String username,
                                @RequestParam String password){
         boolean isValid = service.validateUser(username, password);
@@ -30,6 +30,6 @@ public class LoginController {
 
         model.put("username", username);
 
-        return "home";
+        return "redirect:home";
     }
 }
