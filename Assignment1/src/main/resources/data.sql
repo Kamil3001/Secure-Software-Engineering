@@ -6,32 +6,32 @@ DELETE FROM mcino_moodle.coordinators;
 DELETE FROM mcino_moodle.credentials;
 
 INSERT INTO credentials(username, password) VALUES
-('t.akinwale', 'root1234!'),
-('k.cierpisz', 'root1234!'),
-('n.jasenko', 'root1234!'),
-('n.cvetkovic', 'root1234!'),
-('c.beenham', 'root1234!'),
-('a.heanes', 'root1234!'),
-('r.collier', 'root1234!'),
-('a.lastovsky', 'root1234!'),
-('d.aldred', 'root1234!'),
-('a.golden', 'root1234!'),
-('m.clifford', 'root1234!'),
-('n.charlton', 'root1234!'),
-('s.rasmussen', 'root1234!'),
-('s.corrigan', 'root1234!'),
-('k.kearns', 'root1234!'),
-('a.hough', 'root1234!'),
-('s.lin', 'root1234!'),
-('p.knott', 'root1234!'),
-('h.beach', 'root1234!');
+('t.akinwale', 'Root1234!'),
+('k.cierpisz', 'Root1234!'),
+('n.jasenko', 'Root1234!'),
+('n.cvetkovic', 'Root1234!'),
+('c.beenham', 'Root1234!'),
+('a.heanes', 'Root1234!'),
+('r.collier', 'Root1234!'),
+('a.lastovsky', 'Root1234!'),
+('d.aldred', 'Root1234!'),
+('a.golden', 'Root1234!'),
+('m.clifford', 'Root1234!'),
+('n.charlton', 'Root1234!'),
+('s.rasmussen', 'Root1234!'),
+('s.corrigan', 'Root1234!'),
+('k.kearns', 'Root1234!'),
+('ava.hough', 'Root1234!'),
+('sinead.lin', 'Root1234!'),
+('ps.knott', 'Root1234!'),
+('hum.beach', 'Root1234!');
 
-INSERT INTO coordinators(id, name, surname, username) VALUES
-('13245689', 'Rem', 'Collier', 'r.collier'),
-('18293048', 'Andrew', 'Heanes', 'a.heanes'),
-('17382746', 'Alexey', 'Lastovsky', 'a.lastovsky');
+INSERT INTO coordinators(id, name, surname, username, nationality) VALUES
+('13245689', 'Rem', 'Collier', 'r.collier', 'UK'),
+('18293048', 'Andrew', 'Heanes', 'a.heanes', 'IRE'),
+('17382746', 'Alexey', 'Lastovsky', 'a.lastovsky', 'RUS');
 
-INSERT INTO students(id, name, surname, address, email, is_fee_paid, phone_num, username) VALUES
+INSERT INTO students(id, name, surname, address, email, is_fee_paid, phone_num, username, nationality) VALUES
 ('16312903', 'Nikolaj', 'Jasenko', '19 Priory Hall', 'student16312903@mcino.ie', 0, '0838537281', 'n.jasenko', 'UK'),
 ('16312904', 'Temitope', 'Akinwale', '25 Wicklow Bay', 'student16312904@mcino.ie', 0, '0830537282', 't.akinwale', 'IRE'),
 ('16312905', 'Kamil', 'Cierpisz', '26 Dublin Bay', 'student16312905@mcino.ie', 0, '0838237283', 'k.cierpisz', 'UK'),
@@ -44,10 +44,10 @@ INSERT INTO students(id, name, surname, address, email, is_fee_paid, phone_num, 
 ('16312912', 'Sydney', 'Rasmussen', '30 German Bay', 'student16312912@mcino.ie', 0, '0838437285', 's.rasmussen', 'USA'),
 ('16312913', 'Shiv', 'Corrigan', '31 German Bay', 'student16312913@mcino.ie', 0, '0838437285', 's.corrigan', 'IRE'),
 ('16312914', 'Kody', 'Kearns', '32 German Bay', 'student16312914@mcino.ie', 0, '0838437285', 'k.kearns', 'IRE'),
-('16312915', 'Ava-Rose', 'Hough', '33 German Bay', 'student16312915@mcino.ie', 0, '0838437285', 'a.hough', 'USA'),
-('16312916', 'Sinead', 'Lin', '34 German Bay', 'student16312916@mcino.ie', 0, '0838437285', 's.lin', 'UK'),
-('16312917', 'Precious', 'Knott', '36 German Bay', 'student16312917@mcino.ie', 0, '0838437285', 'p.knott', 'PL'),
-('16312918', 'Humaira', 'Beach', '37 German Bay', 'student16312918@mcino.ie', 0, '0838437285', 'h.beach', 'IRE');
+('16312915', 'Ava-Rose', 'Hough', '33 German Bay', 'student16312915@mcino.ie', 0, '0838437285', 'ava.hough', 'USA'),
+('16312916', 'Sinead', 'Lin', '34 German Bay', 'student16312916@mcino.ie', 0, '0838437285', 'sinead.lin', 'UK'),
+('16312917', 'Precious', 'Knott', '36 German Bay', 'student16312917@mcino.ie', 0, '0838437285', 'ps.knott', 'PL'),
+('16312918', 'Humaira', 'Beach', '37 German Bay', 'student16312918@mcino.ie', 0, '0838437285', 'hum.beach', 'IRE');
 
 
 INSERT INTO modules(capacity, coordinator_id, is_terminated, name, topics) VALUES
