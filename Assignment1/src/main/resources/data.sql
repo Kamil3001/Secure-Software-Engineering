@@ -32,22 +32,22 @@ INSERT INTO coordinators(id, name, surname, username) VALUES
 ('17382746', 'Alexey', 'Lastovsky', 'a.lastovsky');
 
 INSERT INTO students(id, name, surname, address, email, is_fee_paid, phone_num, username) VALUES
-('16312903', 'Nikolaj', 'Jasenko', '19 Priory Hall', 'student16312903@mcino.ie', 0, '0838537281', 'n.jasenko'),
-('16312904', 'Temitope', 'Akinwale', '25 Wicklow Bay', 'student16312904@mcino.ie', 0, '0830537282', 't.akinwale'),
-('16312905', 'Kamil', 'Cierpisz', '26 Dublin Bay', 'student16312905@mcino.ie', 0, '0838237283', 'k.cierpisz'),
-('16312906', 'Conor', 'Beenham', '27 Laois Bay', 'student16312906@mcino.ie', 0, '0838137284', 'c.beenham'),
-('16312907', 'Nebojsa', 'Cvetkovic', '28 German Bay', 'student16312907@mcino.ie', 0, '0838437285', 'n.cvetkovic'),
-('16312908', 'Dolores', 'Aldred', '4553 Broaddus Avenue', 'student16312908@mcino.ie', 0, '0838437285', 'd.aldred'),
-('16312909', 'Anaiya', 'Golden', '1866 Cimmaron Road', 'student16312909@mcino.ie', 0, '0838437285', 'a.golden'),
-('16312910', 'Malak', 'Clifford', '28 German Bay', 'student16312910@mcino.ie', 0, '0838437285', 'm.clifford'),
-('16312911', 'Naveed', 'Charlton', '29 German Bay', 'student16312911@mcino.ie', 0, '0838437285', 'n.charlton'),
-('16312912', 'Sydney', 'Rasmussen', '30 German Bay', 'student16312912@mcino.ie', 0, '0838437285', 's.rasmussen'),
-('16312913', 'Shiv', 'Corrigan', '31 German Bay', 'student16312913@mcino.ie', 0, '0838437285', 's.corrigan'),
-('16312914', 'Kody', 'Kearns', '32 German Bay', 'student16312914@mcino.ie', 0, '0838437285', 'k.kearns'),
-('16312915', 'Ava-Rose', 'Hough', '33 German Bay', 'student16312915@mcino.ie', 0, '0838437285', 'a.hough'),
-('16312916', 'Sinead', 'Lin', '34 German Bay', 'student16312916@mcino.ie', 0, '0838437285', 's.lin'),
-('16312917', 'Precious', 'Knott', '36 German Bay', 'student16312917@mcino.ie', 0, '0838437285', 'p.knott'),
-('16312918', 'Humaira', 'Beach', '37 German Bay', 'student16312918@mcino.ie', 0, '0838437285', 'h.beach');
+('16312903', 'Nikolaj', 'Jasenko', '19 Priory Hall', 'student16312903@mcino.ie', 0, '0838537281', 'n.jasenko', 'UK'),
+('16312904', 'Temitope', 'Akinwale', '25 Wicklow Bay', 'student16312904@mcino.ie', 0, '0830537282', 't.akinwale', 'IRE'),
+('16312905', 'Kamil', 'Cierpisz', '26 Dublin Bay', 'student16312905@mcino.ie', 0, '0838237283', 'k.cierpisz', 'UK'),
+('16312906', 'Conor', 'Beenham', '27 Laois Bay', 'student16312906@mcino.ie', 0, '0838137284', 'c.beenham', 'IRE'),
+('16312907', 'Nebojsa', 'Cvetkovic', '28 German Bay', 'student16312907@mcino.ie', 0, '0838437285', 'n.cvetkovic', 'USA'),
+('16312908', 'Dolores', 'Aldred', '4553 Broaddus Avenue', 'student16312908@mcino.ie', 0, '0838437285', 'd.aldred', 'IRE'),
+('16312909', 'Anaiya', 'Golden', '1866 Cimmaron Road', 'student16312909@mcino.ie', 0, '0838437285', 'a.golden', 'UK'),
+('16312910', 'Malak', 'Clifford', '28 German Bay', 'student16312910@mcino.ie', 0, '0838437285', 'm.clifford', 'PL'),
+('16312911', 'Naveed', 'Charlton', '29 German Bay', 'student16312911@mcino.ie', 0, '0838437285', 'n.charlton', 'PL'),
+('16312912', 'Sydney', 'Rasmussen', '30 German Bay', 'student16312912@mcino.ie', 0, '0838437285', 's.rasmussen', 'USA'),
+('16312913', 'Shiv', 'Corrigan', '31 German Bay', 'student16312913@mcino.ie', 0, '0838437285', 's.corrigan', 'IRE'),
+('16312914', 'Kody', 'Kearns', '32 German Bay', 'student16312914@mcino.ie', 0, '0838437285', 'k.kearns', 'IRE'),
+('16312915', 'Ava-Rose', 'Hough', '33 German Bay', 'student16312915@mcino.ie', 0, '0838437285', 'a.hough', 'USA'),
+('16312916', 'Sinead', 'Lin', '34 German Bay', 'student16312916@mcino.ie', 0, '0838437285', 's.lin', 'UK'),
+('16312917', 'Precious', 'Knott', '36 German Bay', 'student16312917@mcino.ie', 0, '0838437285', 'p.knott', 'PL'),
+('16312918', 'Humaira', 'Beach', '37 German Bay', 'student16312918@mcino.ie', 0, '0838437285', 'h.beach', 'IRE');
 
 
 INSERT INTO modules(capacity, coordinator_id, is_terminated, name, topics) VALUES
