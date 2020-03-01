@@ -1,7 +1,9 @@
 package com.mcino.assignment1.service;
 
 import com.mcino.assignment1.model.Credential;
+import com.mcino.assignment1.model.Student;
 import com.mcino.assignment1.repository.CredentialsRepository;
+import com.mcino.assignment1.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +13,16 @@ public class LoginService {
     @Autowired
     CredentialsRepository credentialsRepository;
 
+    @Autowired
+    StudentRepository studentRepository;
+
     public boolean validateUser(String username, String password){
         Credential findCredentials = credentialsRepository.findByUsernameAndPassword(username, password);
         return findCredentials != null;
+    }
+
+    public boolean isStudent(Credential c){
+        Student student = studentRepository.findByCredentials(c);
+        return student != null;
     }
 }

@@ -3,14 +3,16 @@ package com.mcino.assignment1.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
-@SessionAttributes("username")
 public class WebController {
 
     @RequestMapping(value="/home")
     public String showHomePage(ModelMap model){
+
         return "home";
     }
 
@@ -32,6 +34,14 @@ public class WebController {
     @RequestMapping(value="/statistics")
     public String showStatisticsPage(ModelMap model){
         return "statistics";
+    }
+
+    @RequestMapping(value="/logout")
+    public String logout(HttpSession session, SessionStatus status){
+        session.removeAttribute("username");
+        session.removeAttribute("role");
+        status.setComplete();
+        return "redirect:/";
     }
 
 }

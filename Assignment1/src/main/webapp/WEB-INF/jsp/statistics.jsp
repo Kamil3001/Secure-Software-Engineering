@@ -13,7 +13,6 @@
     <div id="header">
         <div id="logo">
             <div id="logo_text">
-                <!-- class="logo_colour", allows you to change the colour of the text -->
                 <h1><a href="home">MCINO<span class="logo_colour">moodle</span></a></h1>
                 <h2>Bringing students and staff together.</h2>
             </div>
@@ -21,11 +20,15 @@
         <div id="menubar">
             <ul id="menu">
                 <li ><a href="home">Home</a></li>
+                <% if(session != null && session.getAttribute("username") != null ){%>
                 <li class="selected"><a href="statistics">Statistics</a></li>
                 <li ><a href="view_modules">Modules</a></li>
-                <li><a href="my_profile">My Profile</a></li>
-                <li ><a href="staff">Staff Only</a></li>
-                <li ><a href="login">Login</a></li>
+                <li ><a href="my_profile">My Profile</a></li>
+                <% if(session.getAttribute("role") != null && session.getAttribute("role").equals("staff")){%>
+                <li ><a href="staff">Staff Portal</a></li>
+                <%}%>
+                <li><a href="logout">Logout</a></li>
+                <% } %>
             </ul>
         </div>
     </div>
