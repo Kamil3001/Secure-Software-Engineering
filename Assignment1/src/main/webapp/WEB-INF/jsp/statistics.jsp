@@ -19,9 +19,9 @@
         </div>
         <div id="menubar">
             <ul id="menu">
-                <li class="selected"><a href="home">Home</a></li>
+                <li ><a href="home">Home</a></li>
                 <% if(session != null && session.getAttribute("username") != null ){%>
-                <li ><a href="statistics">Statistics</a></li>
+                <li class="selected"><a href="statistics">Statistics</a></li>
                 <li ><a href="view_modules">Modules</a></li>
                 <li ><a href="my_profile">My Profile</a></li>
                 <% if(session.getAttribute("role") != null && session.getAttribute("role").equals("staff")){%>
