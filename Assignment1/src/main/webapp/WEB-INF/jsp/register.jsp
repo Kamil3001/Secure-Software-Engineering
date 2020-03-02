@@ -23,6 +23,9 @@
             <input class="userInput" type="text" align="center" name="surname" placeholder="Surname*">
         </label>
         <label>
+            <input class="userInput" type="text" align="center" name="nationality" placeholder="Nationality*">
+        </label>
+        <label>
             <input class="userInput" type="text" align="center" name="student_id" placeholder="Student ID*">
         </label>
         <label>

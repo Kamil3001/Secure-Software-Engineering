@@ -29,12 +29,13 @@ public class RegisterController {
     public String showLoginPage(ModelMap model, @RequestParam String username, @RequestParam String password,
                                 @RequestParam String name,
                                 @RequestParam String surname,
+                                @RequestParam String nationality,
                                 @RequestParam String studentid,
                                 @RequestParam String address,
                                 @RequestParam String phonenumber,
                                 @RequestParam String email){
 
-        FormValidationInformation fvi = service.check(username, password, name, surname, studentid, address, phonenumber, email);
+        FormValidationInformation fvi = service.check(username, password, name, surname, nationality, studentid, address, phonenumber, email);
         if(!fvi.isValid()){
             model.put("error", fvi.getMessage());
             return "register";
@@ -50,6 +51,7 @@ public class RegisterController {
         newStudent.setCredentials(newCredentials);
         newStudent.setName(name);
         newStudent.setSurname(surname);
+        newStudent.setNationality(nationality);
         newStudent.setEmail(email);
         newStudent.setFeePaid(false);
         newStudent.setAddress(address);

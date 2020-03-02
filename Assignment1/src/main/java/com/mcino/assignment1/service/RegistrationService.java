@@ -21,6 +21,7 @@ public class RegistrationService {
 
     public FormValidationInformation check(String username,  String password, String name,
                            String surname,
+                           String nationality,
                            String studentid,
                            String address,
                            String phonenumber,
