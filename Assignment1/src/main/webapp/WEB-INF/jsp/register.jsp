@@ -26,13 +26,13 @@
             <input class="userInput" type="text" align="center" name="nationality" placeholder="Nationality*">
         </label>
         <label>
-            <input class="userInput" type="text" align="center" name="student_id" placeholder="Student ID*">
+            <input class="userInput" type="text" align="center" name="studentid" placeholder="Student ID*">
         </label>
         <label>
             <input class="userInput" type="text" align="center" name="address" placeholder="Address*">
         </label>
         <label>
-            <input class="userInput" type="text" align="center" name="phone_number" placeholder="Phone Number*">
+            <input class="userInput" type="text" align="center" name="phonenumber" placeholder="Phone Number*">
         </label>
         <label>
             <input class="userInput" type="email" align="center" name="email" placeholder="Email*">
