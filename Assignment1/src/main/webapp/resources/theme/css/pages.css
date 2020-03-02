@@ -85,16 +85,16 @@ ol li
 { margin: 0 0 11px 0;}
 
 #main, #logo, #menubar, #site_content, #footer
-{ margin-left: auto;
+{
+    margin-left: auto;
     margin-right: auto;}
 
 #header
-{ background: #025587;
-    height: 240px;}
+{ background: #025587;}
 
 #logo
-{ width: 825px;
-    position: relative;
+{   position: relative;
+    padding-left: 10em;
     height: 168px;
     background: #025587 url(logo.png) no-repeat;}
 
@@ -124,7 +124,7 @@ ol li
     color: #DDD;}
 
 #menubar
-{ width: 877px;
+{
     height: 72px;
     padding: 0;
     background: #29415D url(menu.png) repeat-x;}
@@ -155,20 +155,21 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
     background: #1C2C3E url(menu_select.png) repeat-x;}
 
 #site_content
-{ width: 837px;
+{
     overflow: hidden;
     margin: 0 auto 0 auto;
     padding: 20px 24px 20px 37px;
     background: #FFF url(content.png) repeat-y;}
 
 .sidebar
-{ float: right;
-    width: 190px;
-    padding: 0 15px 20px 15px;}
+{
+    width: 30%;
+    float: right;
+}
 
 .sidebar ul
-{ width: 178px;
-    padding: 4px 0 0 0;
+{
+    padding: 4px 15px 0 15px;
     margin: 4px 0 30px 0;}
 
 .sidebar li
@@ -186,7 +187,7 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 
 #content
 { text-align: left;
-    width: 595px;
+    width: 65%;
     padding: 0;}
 
 #content ul
@@ -200,7 +201,7 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
     line-height: 1.5em;}
 
 #footer
-{ width: 878px;
+{
     font: normal 100% 'lucida sans unicode', arial, sans-serif;
     height: 33px;
     padding: 24px 0 5px 0;
@@ -289,3 +290,52 @@ table tr td
 { background: #F0EFE2;
     color: #47433F;
     border-top: 1px solid #FFF;}
+
+#content .siswebstyle li {
+    color: #007eba;
+    padding-bottom: 10px;
+    padding-left: 0;
+    margin-left: 0;
+    text-align: left;
+    list-style: none;
+    font-size: 18px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.siswebstyle {
+    padding-top: 15px;
+}
+
+.siswebstyle a {
+    color: #007eba;
+    display: block;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.siswebstyle a:hover {
+    text-decoration: underline;
+}
+
+small {
+    font-size: 60%;
+    line-height: normal;
+}
+
+.unpaid-fees {
+    font-weight: bold;
+    color: red;
+    font-size: 80%;
+}
+
+@media only screen and (max-width: 650px) {
+    ul#menu li a {
+        padding: 15px;
+        height: 18px;
+        font-size: 85%;
+    }
+
+    #menubar {
+        height: 48px;
+    }
+}
