@@ -21,8 +21,10 @@ public class LoginService {
         return findCredentials != null;
     }
 
-    public boolean isStudent(Credential c){
+    public long isStudent(Credential c){
         Student student = studentRepository.findByCredentials(c);
-        return student != null;
+        if(student == null)
+            return -1L;
+        return student.getId();
     }
 }

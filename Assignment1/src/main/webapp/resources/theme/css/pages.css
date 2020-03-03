@@ -277,44 +277,75 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
     border-bottom: 1px solid #FFF;
     margin: 0 0 20px 0;}
 
-table
-{ margin: 10px 0 30px 0;}
+table {
+    margin: 10px 0 30px 0;
+    width: 100%;
+}
 
-table tr th, table tr td
-{ background: #3B3B3B;
-    color: #FFF;
-    padding: 7px 4px;
-    text-align: left;}
 
-table tr td
-{ background: #F0EFE2;
-    color: #47433F;
-    border-top: 1px solid #FFF;}
-
-#content .siswebstyle li {
-    color: #007eba;
-    padding-bottom: 10px;
-    padding-left: 0;
-    margin-left: 0;
+table tr th, table tr td {
+    padding: 1em 1em;
     text-align: left;
-    list-style: none;
-    font-size: 18px;
-    border-bottom: 1px solid #ebebeb;
+}
+
+table tr th {
+    background: #29415d;
+    white-space: nowrap;
+    color: #FFF;
+}
+
+table tr td {
+    width: 100%;
+    background: #F0EFE2;
+    color: #47433F;
+    border-top: 1px solid #FFF;
 }
 
 .siswebstyle {
     padding-top: 15px;
 }
 
-.siswebstyle a {
+.siswebstyle button {
     color: #007eba;
-    display: block;
-    line-height: normal;
-    text-decoration: none;
+    text-align: left;
+    font-size: 18px;
 }
 
-.siswebstyle a:hover {
-    text-decoration: underline;
+#content .siswebstyle li {
+    padding-left: 0;
+}
+
+.collapsible {
+    background-color: #FFFFFF;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: 1px solid #1293EE;
+    outline: none;
+}
+
+.active .collapsible {
+    box-shadow: none;
+}
+
+.collapsible::after {
+    float: right;
+    content: "\2b";
+    font-weight: bold;
+}
+
+.active.collapsible::after {
+    content: "\2212"
+}
+
+.collapsible-content {
+    background-color: ghostwhite;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    border: 1px solid #1293EE;
+    border-top: 0;
+    box-shadow: 0 1px;
 }
 
 small {

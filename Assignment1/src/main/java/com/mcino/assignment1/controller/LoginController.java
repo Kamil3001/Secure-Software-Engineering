@@ -39,8 +39,11 @@ public class LoginController {
         }
         session.setAttribute("username", username);
 
-        if(service.isStudent(c)) {
+        long studentId = service.isStudent(c);
+
+        if(studentId != -1) {
             session.setAttribute("role","student");
+            session.setAttribute("id", studentId);
         }else{
             session.setAttribute("role", "staff");
         }

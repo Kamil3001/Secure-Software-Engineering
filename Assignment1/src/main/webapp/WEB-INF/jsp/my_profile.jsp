@@ -61,25 +61,56 @@
             </form>
         </div>
         <div id="content">
-            <h1>My Student Record</h1>
-            <p class="unpaid-fees">NOTE: You have unpaid fees, click on Registration below to pay your fees.</p>
-            <p><strong>Student Number:</strong> </p>
-            <p><strong>Name:</strong> </p>
-            <p><strong>Surname:</strong> </p>
-            <p><strong>Address:</strong> </p>
-            <p><strong>E-mail:</strong> </p>
+            <h1 style="margin-bottom: 0">My Student Record</h1>
+            <small class="unpaid-fees">NOTE: You have unpaid fees, click on Registration below to pay your fees.</small>
+            <table>
+                <tr>
+                    <th>Student ID:</th>
+                    <td>${student.id}</td>
+                </tr>
+                <tr>
+                    <th>Name:</th>
+                    <td>${student.name}</td>
+                </tr>
+                <tr>
+                    <th>Surname:</th>
+                    <td>${student.surname}</td>
+                </tr>
+                <tr>
+                    <th>Nationality:</th>
+                    <td>${student.nationality}</td>
+                </tr>
+                <tr>
+                    <th>Address:</th>
+                    <td>${student.address}</td>
+                </tr>
+                <tr>
+                    <th>Phone Number:</th>
+                    <td>${student.phoneNum}</td>
+                </tr>
+                <tr>
+                    <th>E-mail:</th>
+                    <td>${student.email}</td>
+                </tr>
+            </table>
             <ul class="siswebstyle">
                 <li>
-                    <a>My Active Modules</a>
-                    <small>View and un-enroll from your current modules</small>
+                    <button type="button" class="collapsible">Current Modules</button>
+                    <div class="collapsible-content">
+                        <p>Lorem ipsum...</p>
+                    </div>
                 </li>
                 <li>
-                    <a>My Grades</a>
-                    <small>View your grades for terminated modules</small>
+                    <button type="button" class="collapsible">My Grades</button>
+                    <div class="collapsible-content">
+                        <p>Lorem ipsum...</p>
+                    </div>
                 </li>
                 <li>
-                    <a>Registration</a>
-                    <small>Pay fees or unregister from the course entirely</small>
+                    <button type="button" class="collapsible">My Registration</button>
+                    <div class="collapsible-content">
+                        <p>Lorem ipsum...</p>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -88,6 +119,24 @@
     <div id="footer">
         MCINO Moodle @ <a href="https://www.mcinofamily.com">MCINO</a>
     </div>
+
+
 </div>
 </body>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+</script>
 </html>

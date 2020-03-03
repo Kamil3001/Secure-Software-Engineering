@@ -1,5 +1,9 @@
 package com.mcino.assignment1.controller;
 
+import com.mcino.assignment1.exception.StudentNotFoundException;
+import com.mcino.assignment1.model.Student;
+import com.mcino.assignment1.service.MyProfileService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +13,9 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class WebController {
+
+    @Autowired
+    MyProfileService myProfileService;
 
     @RequestMapping(value="/home")
     public String showHomePage(ModelMap model){
@@ -22,7 +29,9 @@ public class WebController {
     }
 
     @RequestMapping(value="/my_profile")
-    public String showMyProfilePage(ModelMap model){
+    public String showMyProfilePage(HttpSession session, ModelMap model) throws StudentNotFoundException {
+        long studentId = (long) session.getAttribute("id");
+        model.addAttribute("student", myProfileService.retrieveStudent(studentId));
         return "my_profile";
     }
 
