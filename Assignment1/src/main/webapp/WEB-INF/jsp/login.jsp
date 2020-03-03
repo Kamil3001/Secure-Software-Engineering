@@ -4,7 +4,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../resources/theme/css/form.css" type="text/css">
-    <title>Login</title>
+    <title>MCINO Moodle - Login</title>
 </head>
 
 <body>

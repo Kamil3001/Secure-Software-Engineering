@@ -5,7 +5,9 @@
 <html>
 
 <head>
-    <title>MCINO Moodle - Available Modules</title>
+    <title>
+        MCINO Moodle - ${module.name}
+    </title>
     <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../resources/theme/css/pages.css" type="text/css">
@@ -17,21 +19,21 @@
         <div id="logo">
             <div id="logo_text">
                 <!-- class="logo_colour", allows you to change the colour of the text -->
-                <h1><a href="home">MCINO<span class="logo_colour">moodle</span></a></h1>
+                <h1><a href="../home">MCINO<span class="logo_colour">moodle</span></a></h1>
                 <h2>Bringing students and staff together.</h2>
             </div>
         </div>
         <div id="menubar">
             <ul id="menu">
-                <li ><a href="home">Home</a></li>
+                <li ><a href="../home">Home</a></li>
                 <% if(session != null && session.getAttribute("username") != null ){%>
-                <li ><a href="statistics">Statistics</a></li>
-                <li class="selected" ><a href="view_modules">Modules</a></li>
-                <li ><a href="my_profile">My Profile</a></li>
+                <li ><a href="../statistics">Statistics</a></li>
+                <li><a href="../view_modules">Modules</a></li>
+                <li ><a href="../my_profile">My Profile</a></li>
                 <% if(session.getAttribute("role") != null && session.getAttribute("role").equals("staff")){%>
-                <li ><a href="staff">Staff Portal</a></li>
+                <li ><a href="../staff">Staff Portal</a></li>
                 <%}%>
-                <li><a href="logout">Logout</a></li>
+                <li><a href="../logout">Logout</a></li>
                 <% } %>
             </ul>
         </div>
@@ -65,30 +67,7 @@
         </div>
         <div id="content">
             <!-- insert the page content here -->
-            <h1>Available Modules</h1>
-            <input type="text" id="searchInput" onkeyup="searchTopics()" placeholder="Search for topics..">
-            <table id="moduleTable">
-                <tr>
-                    <th>Module ID</th>
-                    <th>Module Name</th>
-                    <th>Topics</th>
-                </tr>
-                <c:if test="${fn:length(all_modules) != 0}">
-                    <c:forEach var="module" items="${all_modules}">
-                            <tr>
-                                <td>${module.id}</td>
-                                <td>
-                                    <a href="module/${module.id}">
-                                        ${module.name}
-                                    </a>
-                                </td>
-                                <td>${module.topics}</td>
-                            </tr>
-                        </a>
-                    </c:forEach>
-                </c:if>
-            </table>
-
+            <h1>${module.name}</h1>
         </div>
     </div>
     <div id="content_footer"></div>
@@ -97,26 +76,4 @@
     </div>
 </div>
 </body>
-<script>
-    function searchTopics() {
-        var input = document.getElementById("searchInput");
-        var filter = input.value.toUpperCase();
-        var table = document.getElementById("moduleTable");
-        var tr = table.getElementsByTagName("tr");
-
-        var td, txt, i;
-        for (i=0; i<tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[2];
-            if (td) {
-                txt = td.textContent || td.innerText;
-                if (txt.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                }
-                else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-</script>
 </html>

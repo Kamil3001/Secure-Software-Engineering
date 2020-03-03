@@ -6,12 +6,12 @@ import com.mcino.assignment1.model.Student;
 import com.mcino.assignment1.repository.ModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/modules")
@@ -28,11 +28,14 @@ public class ModuleController {
 //        return moduleRepository.findAll();
 //    }
 
-    @GetMapping("/{id}")
-    public Module getModuleById(@PathVariable(value = "id") Long moduleId) throws ModuleNotFoundException {
-        return moduleRepository.findById(moduleId)
-                .orElseThrow(() -> new ModuleNotFoundException(moduleId));
-    }
+//    @RequestMapping("/{id}")
+//    public String getModuleById(ModelMap model, @PathVariable(value = "id") Long moduleId) throws ModuleNotFoundException {
+//        Module module = moduleRepository.findById(moduleId)
+//                .orElseThrow(() -> new ModuleNotFoundException(moduleId));
+//        model.addAttribute("module", module);
+//        System.out.println(module.toString());
+//        return "redirect:/module";
+//    }
 
     @PutMapping("/{id}/update")
     public Module updateModuleDetails(@PathVariable(value = "id") Long moduleId,

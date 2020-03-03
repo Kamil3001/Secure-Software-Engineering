@@ -3,7 +3,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../resources/theme/css/form.css" type="text/css">
-    <title>Registration</title>
+    <title>MCINO Moodle - Registration</title>
 </head>
 
 <body>

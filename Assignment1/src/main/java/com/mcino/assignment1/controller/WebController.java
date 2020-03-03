@@ -1,5 +1,6 @@
 package com.mcino.assignment1.controller;
 
+import com.mcino.assignment1.exception.ModuleNotFoundException;
 import com.mcino.assignment1.exception.StudentNotFoundException;
 import com.mcino.assignment1.model.Student;
 import com.mcino.assignment1.service.ModuleService;
@@ -7,6 +8,7 @@ import com.mcino.assignment1.service.MyProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -50,6 +52,12 @@ public class WebController {
     @RequestMapping(value="/statistics")
     public String showStatisticsPage(ModelMap model){
         return "statistics";
+    }
+
+    @RequestMapping(value="/module/{id}")
+    public String showModulePage(ModelMap model, @PathVariable(value = "id") long moduleId) throws ModuleNotFoundException {
+        model.addAttribute("module", moduleService.retrieveModuleById(moduleId));
+        return "module";
     }
 
     @RequestMapping(value="/logout")

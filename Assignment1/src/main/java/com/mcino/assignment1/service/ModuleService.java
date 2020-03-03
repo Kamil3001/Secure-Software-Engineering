@@ -1,5 +1,6 @@
 package com.mcino.assignment1.service;
 
+import com.mcino.assignment1.exception.ModuleNotFoundException;
 import com.mcino.assignment1.model.Module;
 import com.mcino.assignment1.repository.ModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,5 +18,9 @@ public class ModuleService {
         return moduleRepository.findAll();
     }
 
+    public Module retrieveModuleById(long moduleId) throws ModuleNotFoundException {
+        return moduleRepository.findById(moduleId)
+                .orElseThrow(() -> new ModuleNotFoundException(moduleId));
+    }
 
 }

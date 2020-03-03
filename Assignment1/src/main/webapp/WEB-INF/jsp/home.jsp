@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>colour_blue - a page</title>
+    <title>MCINO Moodle - Home</title>
     <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../resources/theme/css/pages.css" type="text/css">
