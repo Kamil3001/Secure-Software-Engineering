@@ -64,7 +64,9 @@
         </div>
         <div id="content">
             <h1 style="margin-bottom: 0">My Student Record</h1>
-            <small class="unpaid-fees">NOTE: You have unpaid fees, click on My Registration below to pay your fees.</small>
+            <c:if test="${not student.feePaid}">
+                <small class="unpaid-fees">NOTE: You have unpaid fees, click on My Registration below to pay your fees.</small>
+            </c:if>
             <table>
                 <tr>
                     <th>Student ID:</th>

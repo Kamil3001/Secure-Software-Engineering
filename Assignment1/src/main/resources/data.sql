@@ -31,7 +31,7 @@ INSERT INTO coordinators(id, name, surname, username, nationality) VALUES
 ('18293048', 'Andrew', 'Heanes', 'a.heanes', 'IRE'),
 ('17382746', 'Alexey', 'Lastovsky', 'a.lastovsky', 'RUS');
 
-INSERT INTO students(id, name, surname, address, email, is_fee_paid, phone_num, username, nationality) VALUES
+INSERT INTO students(id, name, surname, address, email, fee_paid, phone_num, username, nationality) VALUES
 ('16312903', 'Nikolaj', 'Jasenko', '19 Priory Hall', 'student16312903@mcino.ie', 0, '0838537281', 'n.jasenko', 'UK'),
 ('16312904', 'Temitope', 'Akinwale', '25 Wicklow Bay', 'student16312904@mcino.ie', 0, '0830537282', 't.akinwale', 'IRE'),
 ('16312905', 'Kamil', 'Cierpisz', '26 Dublin Bay', 'student16312905@mcino.ie', 0, '0838237283', 'k.cierpisz', 'UK'),

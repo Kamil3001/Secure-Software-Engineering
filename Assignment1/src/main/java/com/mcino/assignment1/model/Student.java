@@ -28,7 +28,7 @@ public class Student extends User implements Serializable {
     @NotEmpty
     private String phoneNum;
 
-    private boolean isFeePaid;
+    private boolean feePaid;
 
     @ToString.Exclude
 //    @JsonIgnore
