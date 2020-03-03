@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -28,9 +29,24 @@ public class MyProfileService {
 
         List<Module> modules = new ArrayList<>();
         for(StudentModule sm : student.getStudentModules()) {
-            modules.add(sm.getModule());
+            if(!sm.getModule().isTerminated())
+                modules.add(sm.getModule());
         }
 
         return modules;
+    }
+
+    public HashMap<Long, String[]> retrieveTerminatedModules(long id) throws StudentNotFoundException {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new StudentNotFoundException(id));
+
+        HashMap<Long, String[]> moduleGrades = new HashMap<>();
+        for(StudentModule sm : student.getStudentModules()) {
+            if(sm.getModule().isTerminated()) {
+                moduleGrades.put(sm.getModuleId(), new String[]{sm.getModule().getName(), sm.getGrade()});
+            }
+        }
+
+        return moduleGrades;
     }
 }

@@ -67,7 +67,7 @@
             <c:if test="${not student.feePaid}">
                 <small class="unpaid-fees">NOTE: You have unpaid fees, click on My Registration below to pay your fees.</small>
             </c:if>
-            <table>
+            <table class="student-info">
                 <tr>
                     <th>Student ID:</th>
                     <td>${student.id}</td>
@@ -102,7 +102,7 @@
                     <button type="button" class="collapsible">Current Modules</button>
                     <div class="collapsible-content">
                         <ul>
-                        <c:forEach var="module" items="${modules}">
+                        <c:forEach var="module" items="${curr_modules}">
                             <%-- todo try change this to redirect to module page and add unenroll option --%>
                             <li>${module.name}</li>
                         </c:forEach>
@@ -112,8 +112,22 @@
                 <li>
                     <button type="button" class="collapsible">My Grades</button>
                     <div class="collapsible-content">
-                        <%-- todo display grades of terminated modules --%>
-                        <p>Lorem ipsum...</p>
+                            <c:if test="${moduleGradeMap.length != 0}">
+                                <table>
+                                    <tr>
+                                        <th>Module ID</th>
+                                        <th>Module Name</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                    <c:forEach var="entry" items="${moduleGradeMap}">
+                                    <tr>
+                                        <td>${entry.key}</td>
+                                        <td>${entry.value[0]}</td>
+                                        <td>${entry.value[1]}</td>
+                                    </tr>
+                                    </c:forEach>
+                                </table>
+                            </c:if>
                     </div>
                 </li>
                 <li>

@@ -32,7 +32,8 @@ public class WebController {
     public String showMyProfilePage(HttpSession session, ModelMap model) throws StudentNotFoundException {
         long studentId = (long) session.getAttribute("id");
         model.addAttribute("student", myProfileService.retrieveStudent(studentId));
-        model.addAttribute("modules", myProfileService.retrieveStudentsModules(studentId));
+        model.addAttribute("curr_modules", myProfileService.retrieveStudentsModules(studentId));
+        model.addAttribute("moduleGradeMap", myProfileService.retrieveTerminatedModules(studentId));
         return "my_profile";
     }
 
