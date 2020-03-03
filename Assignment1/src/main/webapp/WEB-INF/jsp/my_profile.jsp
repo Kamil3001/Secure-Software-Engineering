@@ -1,3 +1,5 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML>
 <html>
 
@@ -62,7 +64,7 @@
         </div>
         <div id="content">
             <h1 style="margin-bottom: 0">My Student Record</h1>
-            <small class="unpaid-fees">NOTE: You have unpaid fees, click on Registration below to pay your fees.</small>
+            <small class="unpaid-fees">NOTE: You have unpaid fees, click on My Registration below to pay your fees.</small>
             <table>
                 <tr>
                     <th>Student ID:</th>
@@ -97,18 +99,25 @@
                 <li>
                     <button type="button" class="collapsible">Current Modules</button>
                     <div class="collapsible-content">
-                        <p>Lorem ipsum...</p>
+                        <ul>
+                        <c:forEach var="module" items="${modules}">
+                            <%-- todo try change this to redirect to module page and add unenroll option --%>
+                            <li>${module.name}</li>
+                        </c:forEach>
+                        </ul>
                     </div>
                 </li>
                 <li>
                     <button type="button" class="collapsible">My Grades</button>
                     <div class="collapsible-content">
+                        <%-- todo display grades of terminated modules --%>
                         <p>Lorem ipsum...</p>
                     </div>
                 </li>
                 <li>
                     <button type="button" class="collapsible">My Registration</button>
                     <div class="collapsible-content">
+                        <%-- todo add pay fees button and unregister button --%>
                         <p>Lorem ipsum...</p>
                     </div>
                 </li>

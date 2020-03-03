@@ -340,7 +340,7 @@ table tr td {
 
 .collapsible-content {
     background-color: ghostwhite;
-    padding: 0 18px;
+    padding: 1.5em 2em;
     display: none;
     overflow: hidden;
     border: 1px solid #1293EE;
