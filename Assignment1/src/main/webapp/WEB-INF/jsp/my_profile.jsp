@@ -65,7 +65,7 @@
         <div id="content">
             <h1 style="margin-bottom: 0">My Student Record</h1>
             <c:if test="${not student.feePaid}">
-                <small class="unpaid-fees">NOTE: You have unpaid fees, click on My Registration below to pay your fees.</small>
+                <small class="red-info">NOTE: You have unpaid fees, click on My Registration below to pay your fees.</small>
             </c:if>
             <table class="student-info">
                 <tr>
@@ -133,8 +133,13 @@
                 <li>
                     <button type="button" class="collapsible">My Registration</button>
                     <div class="collapsible-content">
-                        <%-- todo add pay fees button and unregister button --%>
-                        <p>Lorem ipsum...</p>
+                        <c:if test="${not student.feePaid}">
+                            <a href="/students/${student.id}/payFees">Pay Fees</a>
+                        </c:if>
+                        <p>
+                            <a href="/students/${student.id}/unregister">Unregister</a>
+                            <small class="red-info">(THIS WILL PERMANENTLY DELETE YOUR RECORD)</small>
+                        </p>
                     </div>
                 </li>
             </ul>

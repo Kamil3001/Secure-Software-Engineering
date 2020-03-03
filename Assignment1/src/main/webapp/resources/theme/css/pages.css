@@ -356,7 +356,7 @@ small {
     line-height: normal;
 }
 
-.unpaid-fees {
+.red-info {
     font-weight: bold;
     color: red;
     font-size: 80%;

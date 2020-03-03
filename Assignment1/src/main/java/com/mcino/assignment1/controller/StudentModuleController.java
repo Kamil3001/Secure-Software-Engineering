@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -27,8 +26,7 @@ public class StudentModuleController {
         return studentModuleRepository.findByModuleId(moduleId);
     }
 
-    @Transactional
-    @DeleteMapping("students/{student_id}/drop/{module_id}")
+    @DeleteMapping("/students/{student_id}/drop/{module_id}")
     public ResponseEntity<?> unEnrollFromModule(@PathVariable(value = "module_id") Long moduleId,
                                                 @PathVariable(value = "student_id") Long studentId) {
         StudentModule studentModule = studentModuleRepository.findByStudentIdAndModuleId(studentId, moduleId);
@@ -36,7 +34,7 @@ public class StudentModuleController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("grades/{module_id}/update/{student_id}")
+    @PutMapping("/grades/{module_id}/update/{student_id}")
     public StudentModule updateGrade(@PathVariable(value = "module_id") Long moduleId,
                             @PathVariable(value = "student_id") Long studentId,
                             @Valid @RequestBody String grade) throws StudentModuleNotFoundException {
