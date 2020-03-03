@@ -4,34 +4,36 @@ import com.mcino.assignment1.exception.StudentModuleNotFoundException;
 import com.mcino.assignment1.model.StudentModule;
 import com.mcino.assignment1.repository.StudentModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.List;
 
-@RestController
+@Controller
 public class StudentModuleController {
 
     @Autowired
     StudentModuleRepository studentModuleRepository;
 
-    @GetMapping("/grades/student/{id}")
-    public List<StudentModule> getStudentGrades(@PathVariable(value = "id") Long studentId) {
-        return studentModuleRepository.findByStudentId(studentId);
-    }
+//    @GetMapping("/grades/student/{id}")
+//    public List<StudentModule> getStudentGrades(@PathVariable(value = "id") Long studentId) {
+//        return studentModuleRepository.findByStudentId(studentId);
+//    }
 
-    @GetMapping("/grades/module/{id}")
-    public List<StudentModule> getModuleGrades(@PathVariable(value = "id") Long moduleId) {
-        return studentModuleRepository.findByModuleId(moduleId);
-    }
+//    @GetMapping("/grades/module/{id}")
+//    public List<StudentModule> getModuleGrades(@PathVariable(value = "id") Long moduleId) {
+//        return studentModuleRepository.findByModuleId(moduleId);
+//    }
 
-    @DeleteMapping("/students/{student_id}/drop/{module_id}")
-    public ResponseEntity<?> unEnrollFromModule(@PathVariable(value = "module_id") Long moduleId,
+    @RequestMapping("/students/{student_id}/drop/{module_id}")
+    public String unEnrollFromModule(@PathVariable(value = "module_id") Long moduleId,
                                                 @PathVariable(value = "student_id") Long studentId) {
         StudentModule studentModule = studentModuleRepository.findByStudentIdAndModuleId(studentId, moduleId);
         studentModuleRepository.delete(studentModule);
-        return ResponseEntity.ok().build();
+        return "redirect:/my_profile";
     }
 
     @PutMapping("/grades/{module_id}/update/{student_id}")

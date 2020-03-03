@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE HTML>
 <html>
@@ -101,18 +102,34 @@
                 <li>
                     <button type="button" class="collapsible">Current Modules</button>
                     <div class="collapsible-content">
-                        <ul>
-                        <c:forEach var="module" items="${curr_modules}">
-                            <%-- todo try change this to redirect to module page and add unenroll option --%>
-                            <li>${module.name}</li>
-                        </c:forEach>
-                        </ul>
+                        <c:choose>
+                            <c:when test="${fn:length(curr_modules) != 0}">
+                                <table>
+                                    <tr>
+                                        <th>Module ID</th>
+                                        <th>Module Name</th>
+                                        <th></th>
+                                    </tr>
+                                <c:forEach var="module" items="${curr_modules}">
+                                    <tr>
+                                        <td>${module.id}</td>
+                                        <td>${module.name}</td>
+                                        <td><a href="/students/${student.id}/drop/${module.id}">Drop</a></td>
+                                    </tr>
+                                </c:forEach>
+                                </table>
+                            </c:when>
+                            <c:otherwise>
+                                <h3>Nothing to display..</h3>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </li>
                 <li>
                     <button type="button" class="collapsible">My Grades</button>
                     <div class="collapsible-content">
-                            <c:if test="${moduleGradeMap.length != 0}">
+                        <c:choose>
+                            <c:when test="${fn:length(moduleGradeMap) != 0}">
                                 <table>
                                     <tr>
                                         <th>Module ID</th>
@@ -120,14 +137,18 @@
                                         <th>Grade</th>
                                     </tr>
                                     <c:forEach var="entry" items="${moduleGradeMap}">
-                                    <tr>
-                                        <td>${entry.key}</td>
-                                        <td>${entry.value[0]}</td>
-                                        <td>${entry.value[1]}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>${entry.key}</td>
+                                            <td>${entry.value[0]}</td>
+                                            <td>${entry.value[1]}</td>
+                                        </tr>
                                     </c:forEach>
                                 </table>
-                            </c:if>
+                            </c:when>
+                            <c:otherwise>
+                                <h3>Nothing to display..</h3>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </li>
                 <li>
