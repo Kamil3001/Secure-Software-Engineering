@@ -5,6 +5,7 @@ import com.mcino.assignment1.model.Module;
 import com.mcino.assignment1.model.Student;
 import com.mcino.assignment1.repository.ModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -12,7 +13,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/modules")
 public class ModuleController {
 
@@ -22,10 +23,10 @@ public class ModuleController {
     @Autowired
     private EntityManager em;
 
-    @GetMapping
-    public List<Module> getAllModules() {
-        return moduleRepository.findAll();
-    }
+//    @GetMapping
+//    public List<Module> getAllModules() {
+//        return moduleRepository.findAll();
+//    }
 
     @GetMapping("/{id}")
     public Module getModuleById(@PathVariable(value = "id") Long moduleId) throws ModuleNotFoundException {
@@ -49,12 +50,13 @@ public class ModuleController {
     }
 
     @Transactional
-    @PostMapping("/{id}/enroll")
-    public void enrollToModule(@PathVariable(value = "id") Long moduleId,
-                               @Valid @RequestBody Long studentId) {
+    @RequestMapping("/{module_id}/enroll/{student_id}")
+    public String enrollToModule(@PathVariable(value = "module_id") Long moduleId, @PathVariable(value = "student_id") Long studentId) {
         Module module = em.getReference(Module.class, moduleId);
         Student student = em.getReference(Student.class, studentId);
         module.addStudent(student);
         em.persist(module);
+
+        return "redirect:/view_modules";
     }
 }

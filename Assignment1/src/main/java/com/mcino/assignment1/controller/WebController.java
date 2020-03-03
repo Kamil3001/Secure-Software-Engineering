@@ -2,6 +2,7 @@ package com.mcino.assignment1.controller;
 
 import com.mcino.assignment1.exception.StudentNotFoundException;
 import com.mcino.assignment1.model.Student;
+import com.mcino.assignment1.service.ModuleService;
 import com.mcino.assignment1.service.MyProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class WebController {
     @Autowired
     MyProfileService myProfileService;
 
+    @Autowired
+    ModuleService moduleService;
+
     @RequestMapping(value="/home")
     public String showHomePage(ModelMap model){
 
@@ -25,6 +29,7 @@ public class WebController {
 
     @RequestMapping(value="/view_modules")
     public String showModulesPage(ModelMap model){
+        model.addAttribute("all_modules", moduleService.retrieveAllModules());
         return "view_modules";
     }
 
