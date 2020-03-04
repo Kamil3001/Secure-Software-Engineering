@@ -68,6 +68,37 @@
         <div id="content">
             <!-- insert the page content here -->
             <h1>${module.name}</h1>
+            <table class="student-info">
+                <tr>
+                    <th>Module ID:</th>
+                    <td>${module.id}</td>
+                </tr>
+                <tr>
+                    <th>Coordinator Name</th>
+                    <td>TODO</td>
+                </tr>
+                <tr>
+                    <th>Is Ongoing:</th>
+                    <td>${!module.terminated}</td>
+                    <%-- todo change this to show Active/Terminated instead --%>
+                </tr>
+                <tr>
+                    <th>Capacity:</th>
+                    <td>${module.capacity}</td>
+                </tr>
+                <tr>
+                    <th>Number of Enrolled Students:</th>
+                    <td>TODO</td>
+                </tr>
+                <tr>
+                    <th>Topics:</th>
+                    <td>${module.topics}</td>
+                </tr>
+            </table>
+            <%-- todo implement enrollment button if student logged in and capacity not reached --%>
+            <%-- todo add grade distribution display for previous editions of the module --%>
+            <button>Enroll</button>
+            <h2>Grade Distributions</h2>
         </div>
     </div>
     <div id="content_footer"></div>
