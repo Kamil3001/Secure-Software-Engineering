@@ -58,7 +58,7 @@ public class RegistrationService {
             fvi.setMessage("Name or surname not valid");
             return fvi;
         }
-        else if(address.isEmpty() || email.isEmpty()){
+        else if(address.isEmpty() || email.isEmpty() || nationality.isEmpty()){
             fvi.setValid(false);
             fvi.setMessage("Some fields are empty");
             return fvi;

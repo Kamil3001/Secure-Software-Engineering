@@ -49,7 +49,6 @@ public class LoginController {
             session.setAttribute("role", "staff");
             session.setAttribute("id", coordinatorId);
         }
-
         return "redirect:home";
     }
 }

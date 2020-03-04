@@ -96,7 +96,8 @@ ol li
 {   position: relative;
     padding-left: 10em;
     height: 168px;
-    background: #025587 url(logo.png) no-repeat;}
+    background: #025587;
+}
 
 #logo #logo_text
 { position: absolute;
@@ -109,11 +110,12 @@ ol li
     text-transform: none;
     margin: 0;}
 
-#logo_text h1, #logo_text h1 a, #logo_text h1 a:hover
-{ padding: 22px 0 0 0;
+#logo_text h1, #logo_text h1 a, #logo_text h1 a:hover {
+    padding: 22px 0 0 0;
     color: #FFF;
     letter-spacing: 0.1em;
-    text-decoration: none;}
+    text-decoration: none;
+}
 
 #logo_text h1 a .logo_colour
 { color: #80FFFF;}
@@ -121,24 +123,27 @@ ol li
 #logo_text h2
 { font-size: 100%;
     padding: 4px 0 0 0;
-    color: #DDD;}
+    color: #DDDDDD;
+}
 
 #menubar
 {
     height: 72px;
     padding: 0;
-    background: #29415D url(menu.png) repeat-x;}
+    background: #29415D;
+}
 
-ul#menu, ul#menu li
-{ float: left;
+ul#menu, ul#menu li { float: left;
     margin: 0;
-    padding: 0;}
+    padding: 0;
+}
 
-ul#menu li
-{ list-style: none;}
+ul#menu li {
+    list-style: none;
+}
 
-ul#menu li a
-{ letter-spacing: 0.1em;
+ul#menu li a {
+    letter-spacing: 0.1em;
     font: normal 100% 'lucida sans unicode', arial, sans-serif;
     display: block;
     float: left;
@@ -148,18 +153,21 @@ ul#menu li a
     color: #FFF;
     text-transform: uppercase;
     text-decoration: none;
-    background: transparent;}
+    background: transparent;
+}
 
-ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
-{ color: #FFF;
-    background: #1C2C3E url(menu_select.png) repeat-x;}
+ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover {
+    color: #FFF;
+    background: #1C2C3E;
+}
+
 
 #site_content
 {
     overflow: hidden;
     margin: 0 auto 0 auto;
     padding: 20px 24px 20px 37px;
-    background: #FFF url(content.png) repeat-y;}
+    background: #FFFFFF;}
 
 .sidebar
 {
@@ -179,7 +187,7 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 .sidebar li a, .sidebar li a:hover
 { padding: 0 0 0 40px;
     display: block;
-    background: transparent url(link.png) no-repeat left center;}
+    background: transparent left center;}
 
 .sidebar li a.selected
 { color: #444;
@@ -195,7 +203,6 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 
 #content ul li
 { list-style-type: none;
-    background: url(bullet.png) no-repeat;
     margin: 0 0 6px 0;
     padding: 0 0 4px 25px;
     line-height: 1.5em;}
@@ -206,10 +213,11 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
     height: 33px;
     padding: 24px 0 5px 0;
     text-align: center;
-    background: #29425E url(footer.png) repeat-x;
+    background: #29425E;
     color: #FFF;
     text-transform: uppercase;
-    letter-spacing: 0.1em;}
+    letter-spacing: 0.1em;
+}
 
 #footer a
 { color: #FFF;
@@ -218,57 +226,6 @@ ul#menu li a:hover, ul#menu li.selected a, ul#menu li.selected a:hover
 #footer a:hover
 { color: #FFF;
     text-decoration: underline;}
-
-.search
-{ color: #5D5D5D;
-    border: 1px solid #BBB;
-    width: 134px;
-    padding: 4px;
-    font: 100% arial, sans-serif;}
-
-.form_settings
-{ margin: 15px 0 0 0;}
-
-.form_settings p
-{ padding: 0 0 4px 0;}
-
-.form_settings span
-{ float: left;
-    width: 200px;
-    text-align: left;}
-
-.form_settings input, .form_settings textarea
-{ padding: 5px;
-    width: 299px;
-    font: 100% arial;
-    border: 1px solid #E5E5DB;
-    background: #FFF;
-    color: #47433F;}
-
-.form_settings .submit
-{ font: 100% arial;
-    border: 1px solid;
-    width: 99px;
-    margin: 0 0 0 212px;
-    height: 33px;
-    padding: 2px 0 3px 0;
-    cursor: pointer;
-    background: #263C56;
-    color: #FFF;}
-
-.form_settings textarea, .form_settings select
-{ font: 100% arial;
-    width: 299px;}
-
-.form_settings select
-{ width: 310px;}
-
-.form_settings .checkbox
-{ margin: 4px 0;
-    padding: 0;
-    width: 14px;
-    border: 0;
-    background: none;}
 
 .separator
 { width: 100%;

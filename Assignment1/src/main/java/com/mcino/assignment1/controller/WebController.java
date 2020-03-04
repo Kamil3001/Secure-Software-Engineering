@@ -1,11 +1,14 @@
 package com.mcino.assignment1.controller;
 
+import com.mcino.assignment1.Utils.NationalityQueryHelper;
 import com.mcino.assignment1.exception.CoordinatorNotFoundException;
 import com.mcino.assignment1.exception.ModuleNotFoundException;
 import com.mcino.assignment1.exception.StudentNotFoundException;
-import com.mcino.assignment1.model.Student;
+import com.mcino.assignment1.repository.StudentRepository;
 import com.mcino.assignment1.service.ModuleService;
 import com.mcino.assignment1.service.MyProfileService;
+import org.hibernate.Session;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,10 +16,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
+import java.util.*;
 
 @Controller
 public class WebController {
+
+    @PersistenceContext
+    EntityManager em;
 
     @Autowired
     MyProfileService myProfileService;
@@ -53,6 +63,30 @@ public class WebController {
 
     @RequestMapping(value="/statistics")
     public String showStatisticsPage(ModelMap model){
+
+        Query queryStudent = em.createNativeQuery("SELECT nationality, COUNT(*) as total FROM students GROUP BY nationality", NationalityQueryHelper.class);
+        Query queryStaff = em.createNativeQuery("SELECT nationality, COUNT(*) as total FROM coordinators GROUP BY nationality", NationalityQueryHelper.class);
+        ArrayList<NationalityQueryHelper> bufferResult = new ArrayList<>();
+        bufferResult.addAll(queryStudent.getResultList());
+        bufferResult.addAll(queryStaff.getResultList());
+
+        HashMap<String, Integer> queryResult = new HashMap<>();
+        for(NationalityQueryHelper o: bufferResult){
+            String nationality = o.getNationality();
+            int total = o.getTotal();
+            if(queryResult.containsKey(nationality)){
+                queryResult.put(nationality, queryResult.get(nationality) + total);
+            }else{
+                queryResult.put(nationality, total);
+            }
+        }
+
+        JSONObject json = new JSONObject();
+        for(Map.Entry e: queryResult.entrySet()){
+            json.put(String.valueOf(e.getKey()), e.getValue());
+        }
+
+        model.addAttribute("data", json);
         return "statistics";
     }
 
