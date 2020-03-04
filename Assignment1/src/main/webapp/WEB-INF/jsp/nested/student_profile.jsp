@@ -24,6 +24,10 @@
         <td>${student.nationality}</td>
     </tr>
     <tr>
+        <th>Gender:</th>
+        <td>${student.gender}</td>
+    </tr>
+    <tr>
         <th>Address:</th>
         <td>${student.address}</td>
     </tr>

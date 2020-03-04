@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @SessionAttributes("status")
 public class RegisterController {
@@ -30,17 +32,25 @@ public class RegisterController {
                                 @RequestParam String name,
                                 @RequestParam String surname,
                                 @RequestParam String nationality,
+                                @RequestParam String gender,
                                 @RequestParam String studentid,
                                 @RequestParam String address,
                                 @RequestParam String phonenumber,
                                 @RequestParam String email){
 
-        FormValidationInformation fvi = service.check(username, password, name, surname, nationality, studentid, address, phonenumber, email);
+        FormValidationInformation fvi = service.check(username, password, name, surname, nationality, gender, studentid, address, phonenumber, email);
         if(!fvi.isValid()){
-            model.put("error", fvi.getMessage());
+            model.addAttribute("error", fvi.getMessage());
             return "register";
+        } else{
+            model.addAttribute("success", fvi.getMessage());
         }
-        //else{model.put("success", fvi.getMessage()); // fix using redirect attributes}
+
+        if(gender.equals("M")){
+            gender = "Male";
+        }else if(gender.equals("F")){
+            gender = "Female";
+        }
 
         Credential newCredentials = new Credential();
         newCredentials.setUsername(username);
@@ -52,6 +62,7 @@ public class RegisterController {
         newStudent.setName(name);
         newStudent.setSurname(surname);
         newStudent.setNationality(nationality);
+        newStudent.setGender(gender);
         newStudent.setEmail(email);
         newStudent.setFeePaid(false);
         newStudent.setAddress(address);

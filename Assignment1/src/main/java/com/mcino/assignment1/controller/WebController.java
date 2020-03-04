@@ -1,13 +1,12 @@
 package com.mcino.assignment1.controller;
 
+import com.mcino.assignment1.Utils.GenderQueryHelper;
 import com.mcino.assignment1.Utils.NationalityQueryHelper;
 import com.mcino.assignment1.exception.CoordinatorNotFoundException;
 import com.mcino.assignment1.exception.ModuleNotFoundException;
 import com.mcino.assignment1.exception.StudentNotFoundException;
-import com.mcino.assignment1.repository.StudentRepository;
 import com.mcino.assignment1.service.ModuleService;
 import com.mcino.assignment1.service.MyProfileService;
-import org.hibernate.Session;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,7 +62,35 @@ public class WebController {
 
     @RequestMapping(value="/statistics")
     public String showStatisticsPage(ModelMap model){
+        JSONObject nationalityData = getNationalityStatistics();
+        JSONObject genderData = getGenderStatistics();
 
+        model.addAttribute("nationality", nationalityData);
+        model.addAttribute("gender", genderData);
+
+        return "statistics";
+    }
+
+    @RequestMapping(value="/module/{id}")
+    public String showModulePage(HttpSession session, ModelMap model, @PathVariable(value = "id") long moduleId) throws ModuleNotFoundException, CoordinatorNotFoundException {
+        model.addAttribute("module", moduleService.retrieveModuleById(moduleId));
+        model.addAttribute("numEnrolled", moduleService.retrieveEnrolledCount(moduleId));
+        model.addAttribute("coordinator", moduleService.retrieveCoordinator(moduleId));
+        if (session.getAttribute("role").equals("student"))
+            model.addAttribute("isEnrolled", moduleService.isEnrolled((long) session.getAttribute("id"), moduleId));
+        return "module";
+    }
+
+    @RequestMapping(value="/logout")
+    public String logout(HttpSession session, SessionStatus status){
+        session.removeAttribute("username");
+        session.removeAttribute("role");
+        session.removeAttribute("id");
+        status.setComplete();
+        return "redirect:/";
+    }
+
+    private JSONObject getNationalityStatistics(){
         Query queryStudent = em.createNativeQuery("SELECT nationality, COUNT(*) as total FROM students GROUP BY nationality", NationalityQueryHelper.class);
         Query queryStaff = em.createNativeQuery("SELECT nationality, COUNT(*) as total FROM coordinators GROUP BY nationality", NationalityQueryHelper.class);
         ArrayList<NationalityQueryHelper> bufferResult = new ArrayList<>();
@@ -86,27 +113,33 @@ public class WebController {
             json.put(String.valueOf(e.getKey()), e.getValue());
         }
 
-        model.addAttribute("data", json);
-        return "statistics";
-    }
+        return json;    }
 
-    @RequestMapping(value="/module/{id}")
-    public String showModulePage(HttpSession session, ModelMap model, @PathVariable(value = "id") long moduleId) throws ModuleNotFoundException, CoordinatorNotFoundException {
-        model.addAttribute("module", moduleService.retrieveModuleById(moduleId));
-        model.addAttribute("numEnrolled", moduleService.retrieveEnrolledCount(moduleId));
-        model.addAttribute("coordinator", moduleService.retrieveCoordinator(moduleId));
-        if (session.getAttribute("role").equals("student"))
-            model.addAttribute("isEnrolled", moduleService.isEnrolled((long) session.getAttribute("id"), moduleId));
-        return "module";
-    }
+    private JSONObject getGenderStatistics(){
+        Query queryStudent = em.createNativeQuery("SELECT gender, COUNT(*) as total FROM students GROUP BY gender", GenderQueryHelper.class);
+        Query queryStaff = em.createNativeQuery("SELECT gender, COUNT(*) as total FROM coordinators GROUP BY gender", GenderQueryHelper.class);
+        ArrayList<GenderQueryHelper> bufferResult = new ArrayList<>();
+        bufferResult.addAll(queryStudent.getResultList());
+        bufferResult.addAll(queryStaff.getResultList());
 
-    @RequestMapping(value="/logout")
-    public String logout(HttpSession session, SessionStatus status){
-        session.removeAttribute("username");
-        session.removeAttribute("role");
-        session.removeAttribute("id");
-        status.setComplete();
-        return "redirect:/";
+        HashMap<String, Integer> queryResult = new HashMap<>();
+        for(GenderQueryHelper o: bufferResult){
+            String gender = o.getGender();
+            int total = o.getTotal();
+            if(queryResult.containsKey(gender)){
+                queryResult.put(gender, queryResult.get(gender) + total);
+            }else{
+                queryResult.put(gender, total);
+            }
+        }
+
+        JSONObject json = new JSONObject();
+        for(Map.Entry e: queryResult.entrySet()){
+            json.put(String.valueOf(e.getKey()), e.getValue());
+        }
+
+        return json;
+
     }
 
 }

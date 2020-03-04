@@ -26,6 +26,9 @@
             <input class="userInput" type="text" align="center" name="nationality" placeholder="Nationality*">
         </label>
         <label>
+            <input class="userInput" type="text" align="center" name="gender" placeholder="Gender (M/F)*">
+        </label>
+        <label>
             <input class="userInput" type="text" align="center" name="studentid" placeholder="Student ID*">
         </label>
         <label>

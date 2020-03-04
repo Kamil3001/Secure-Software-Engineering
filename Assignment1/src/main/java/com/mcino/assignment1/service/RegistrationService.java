@@ -22,6 +22,7 @@ public class RegistrationService {
     public FormValidationInformation check(String username,  String password, String name,
                            String surname,
                            String nationality,
+                           String gender,
                            String studentid,
                            String address,
                            String phonenumber,
@@ -65,6 +66,9 @@ public class RegistrationService {
         }else if(phonenumber.length() < 10){
             fvi.setValid(false);
             fvi.setMessage("Invalid phone number");
+        }else if(gender.isEmpty() || gender.charAt(0) != 'M' || gender.charAt(0) != 'F'){
+            fvi.setValid(false);
+            fvi.setMessage("Ensure you fill the gender field correctly.");
         }
 
         try {

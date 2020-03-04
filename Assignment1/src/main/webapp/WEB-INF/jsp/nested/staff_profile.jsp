@@ -20,6 +20,10 @@
         <th>Nationality:</th>
         <td>${coordinator.nationality}</td>
     </tr>
+    <tr>
+        <th>Gender:</th>
+        <td>${coordinator.gender}</td>
+    </tr>
 </table>
 <ul class="siswebstyle">
     <li>

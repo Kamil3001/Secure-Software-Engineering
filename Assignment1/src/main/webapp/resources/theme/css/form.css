@@ -78,4 +78,10 @@ a {
     text-decoration: none
 }
 
+.success{
+    font-size: 15px;
+    color: #18ff00;
+    text-decoration: none
+}
+
 /*Color scheme: https://coolors.co/ccdbdc-9ad1d4-80ced7-007ea7-003249*/

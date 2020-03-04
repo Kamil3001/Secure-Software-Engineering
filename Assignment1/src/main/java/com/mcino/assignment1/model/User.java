@@ -25,6 +25,9 @@ public abstract class User implements Serializable {
     @NotEmpty
     private String nationality;
 
+    @NotEmpty
+    private String gender;
+
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "username")

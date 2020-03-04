@@ -19,7 +19,7 @@
         </label>
         <p class="error" align="center">${error}</p>
 
-        <!--<p class="error" align="center">${success}</p> fix using redirect attributes-->
+        <p class="success" align="center">${success}</p>
 
         <input class="submit" type="submit" align="center" value="Login"/>
         <p class="register" align="center"><a href="register">No Account? Register here</a></p>

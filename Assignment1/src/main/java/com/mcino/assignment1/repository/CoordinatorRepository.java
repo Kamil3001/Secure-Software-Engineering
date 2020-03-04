@@ -12,6 +12,4 @@ import org.springframework.stereotype.Repository;
 public interface CoordinatorRepository extends JpaRepository<Coordinator, Long>, JpaSpecificationExecutor<Coordinator> {
     Coordinator findByCredentials(Credential credential);
 
-    @Query(value = "SELECT JSON_OBJECT('nationality', nationality, 'total', COUNT(*)) FROM coordinators GROUP BY nationality", nativeQuery = true)
-    JSONObject getNationalityCounts();
 }
