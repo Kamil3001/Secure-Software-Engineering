@@ -5,7 +5,7 @@
 <html>
 
 <head>
-    <title>MCINO Moodle - Available Modules</title>
+    <title>UoS - Available Modules</title>
     <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../resources/theme/css/pages.css" type="text/css">
@@ -49,7 +49,7 @@
     </div>
     <div id="content_footer"></div>
     <div id="footer">
-        MCINO Moodle @ <a href="https://www.mcinofamily.com">MCINO</a>
+        University of Springfield
     </div>
 </div>
 </body>

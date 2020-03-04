@@ -47,11 +47,6 @@ public class WebController {
         return "my_profile";
     }
 
-    @RequestMapping(value="/staff")
-    public String showStaffPage(ModelMap model){
-        return "staff";
-    }
-
     @RequestMapping(value="/statistics")
     public String showStatisticsPage(ModelMap model){
         return "statistics";

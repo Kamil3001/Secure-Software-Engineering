@@ -3,7 +3,7 @@
 
 <div id="logo">
     <div id="logo_text">
-        <h1><a href="home">MCINO<span class="logo_colour">moodle</span></a></h1>
+        <h1><a href="home">University of Springfield</a></h1>
         <h2>Bringing students and staff together.</h2>
     </div>
 </div>
@@ -14,9 +14,6 @@
             <li><a href="statistics">Statistics</a></li>
             <li><a href="view_modules">Modules</a></li>
             <li><a href="my_profile">My Profile</a></li>
-<%--            <c:if test="${sessionScope.role eq staff}">--%>
-<%--                <li><a href="staff">Staff Portal</a></li>--%>
-<%--            </c:if>--%>
             <li><a href="logout">Logout</a></li>
         </c:if>
     </ul>
