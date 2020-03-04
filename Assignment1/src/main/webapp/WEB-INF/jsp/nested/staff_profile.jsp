@@ -2,13 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<h1 style="margin-bottom: 0">My Student Record</h1>
+<h1 style="margin-bottom: 0">My Staff Record</h1>
 <c:if test="${not student.feePaid}">
     <small class="red-info">NOTE: You have unpaid fees, click on My Registration below to pay your fees.</small>
 </c:if>
 <table class="student-info">
     <tr>
-        <th>Student ID:</th>
+        <th>Staff ID:</th>
         <td>${student.id}</td>
     </tr>
     <tr>
@@ -23,22 +23,10 @@
         <th>Nationality:</th>
         <td>${student.nationality}</td>
     </tr>
-    <tr>
-        <th>Address:</th>
-        <td>${student.address}</td>
-    </tr>
-    <tr>
-        <th>Phone Number:</th>
-        <td>${student.phoneNum}</td>
-    </tr>
-    <tr>
-        <th>E-mail:</th>
-        <td>${student.email}</td>
-    </tr>
 </table>
 <ul class="siswebstyle">
     <li>
-        <button type="button" class="collapsible">Current Modules</button>
+        <button type="button" class="collapsible">My Modules</button>
         <div class="collapsible-content">
             <c:choose>
                 <c:when test="${fn:length(curr_modules) != 0}">
@@ -61,44 +49,6 @@
                     <h3>Nothing to display..</h3>
                 </c:otherwise>
             </c:choose>
-        </div>
-    </li>
-    <li>
-        <button type="button" class="collapsible">My Grades</button>
-        <div class="collapsible-content">
-            <c:choose>
-                <c:when test="${fn:length(moduleGradeMap) != 0}">
-                    <table>
-                        <tr>
-                            <th>Module ID</th>
-                            <th>Module Name</th>
-                            <th>Grade</th>
-                        </tr>
-                        <c:forEach var="entry" items="${moduleGradeMap}">
-                            <tr>
-                                <td>${entry.key}</td>
-                                <td><a href="/module/${entry.key}">${entry.value[0]}</a></td>
-                                <td>${entry.value[1]}</td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                </c:when>
-                <c:otherwise>
-                    <h3>Nothing to display..</h3>
-                </c:otherwise>
-            </c:choose>
-        </div>
-    </li>
-    <li>
-        <button type="button" class="collapsible">My Registration</button>
-        <div class="collapsible-content">
-            <c:if test="${not student.feePaid}">
-                <a href="/students/${student.id}/payFees">Pay Fees</a>
-            </c:if>
-            <p>
-                <a href="/students/${student.id}/unregister">Unregister</a>
-                <small class="red-info">(THIS WILL PERMANENTLY DELETE YOUR RECORD)</small>
-            </p>
         </div>
     </li>
 </ul>
