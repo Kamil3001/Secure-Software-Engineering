@@ -28,6 +28,9 @@ public class Module implements Serializable {
     @NotEmpty
     private String name;
 
+    @NotEmpty
+    private String moduleCode;
+
     @NotNull
     private String topics;
 

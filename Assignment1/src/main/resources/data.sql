@@ -54,16 +54,23 @@ INSERT INTO students(id, name, surname, address, email, fee_paid, phone_num, use
 ('16312918', 'Humaira', 'Beach', '37 German Bay', 'student16312918@mcino.ie', 0, '0838437285', 'humbeach', 'Ireland', 'Female');
 
 
-INSERT INTO modules(capacity, coordinator_id, is_terminated, name, topics) VALUES
-('20', '13245689', 0, 'Secure Software Engineering', 'Ethical Hacking, Network Security, SQLi'),
-('30', '13245689', 0, 'Advances in Wireless Networking', 'Network Security, Wireless Standards, Protocols'),
-('20', '18293048', 0, 'Object Oriented Programming', 'Ruby, OOP, Software Engineering'),
-('30', '18293048', 0, 'Introduction to Tai Chi', 'Posture, Yin Yang, Movement'),
-('20', '17382746', 0, 'Software Engineering Project II', 'OOP, Software Engineering, Java'),
-('20', '18293048', 1, 'Computer Programming I', 'C, Memory, Software Engineering'),
-('30', '13245689', 0, 'Computer Programming II', 'C++, OOP, Software Engineering'),
-('20', '17382746', 1, 'Software Engineering Project I', 'OOP, Software Engineering, C'),
-('30', '17382746', 0, 'Graphs and Networks', 'Graphs, Mathematics, Geometry');
+INSERT INTO modules(capacity, coordinator_id, is_terminated, name, topics, module_code) VALUES
+('20', '13245689', 0, 'Secure Software Engineering', 'Ethical Hacking, Network Security, SQLi', 'COMP4200'),
+('30', '13245689', 0, 'Advances in Wireless Networking', 'Network Security, Wireless Standards, Protocols', 'COMP3200'),
+('20', '18293048', 0, 'Object Oriented Programming', 'Ruby, OOP, Software Engineering', 'COMP2300'),
+('30', '18293048', 0, 'Introduction to Tai Chi', 'Posture, Yin Yang, Movement', 'SPORT4200'),
+('20', '17382746', 0, 'Software Engineering Project II', 'OOP, Software Engineering, Java', 'COMP3100'),
+('20', '18293048', 1, 'Computer Programming I', 'C, Memory, Software Engineering', 'COMP1200'),
+('30', '13245689', 0, 'Computer Programming II', 'C++, OOP, Software Engineering', 'COMP2200'),
+('20', '17382746', 1, 'Software Engineering Project I', 'OOP, Software Engineering, C', 'COMP2100'),
+('30', '17382746', 0, 'Graphs and Networks', 'Graphs, Mathematics, Geometry', 'MATH3100'),
+('20', '13245689', 1, 'Secure Software Engineering', 'Ethical Hacking, Network Security, SQLi', 'COMP4200'),
+('30', '13245689', 1, 'Advances in Wireless Networking', 'Network Security, Wireless Standards, Protocols', 'COMP3200'),
+('20', '18293048', 1, 'Object Oriented Programming', 'Ruby, OOP, Software Engineering', 'COMP2300'),
+('30', '18293048', 1, 'Introduction to Tai Chi', 'Posture, Yin Yang, Movement', 'SPORT4200'),
+('20', '17382746', 1, 'Software Engineering Project II', 'OOP, Software Engineering, Java', 'COMP3100'),
+('30', '13245689', 1, 'Computer Programming II', 'C++, OOP, Software Engineering', 'COMP2200'),
+('30', '17382746', 1, 'Graphs and Networks', 'Graphs, Mathematics, Geometry', 'MATH3100');
 
 INSERT INTO student_module(grade, module_id, student_id) VALUES
 ('', '1', '16312903'),
@@ -71,7 +78,7 @@ INSERT INTO student_module(grade, module_id, student_id) VALUES
 ('', '1', '16312905'),
 ('', '2', '16312906'),
 ('', '2', '16312907'),
-('', '2', '16312908'),
+('', '3', '16312908'),
 ('', '3', '16312909'),
 ('', '3', '16312910'),
 ('', '3', '16312911'),
@@ -113,4 +120,21 @@ INSERT INTO student_module(grade, module_id, student_id) VALUES
 ('', '1', '16312915'),
 ('', '9', '16312916'),
 ('', '7', '16312917'),
-('', '1', '16312918');
+('A', '11', '16312918'),
+('B', '12', '16312918'),
+('C', '14', '16312903'),
+('D', '14', '16312904'),
+('A', '16', '16312905'),
+('NG', '16', '16312906'),
+('A', '10', '16312907'),
+('C', '11', '16312908'),
+('B', '16', '16312909'),
+('D', '13', '16312910'),
+('C', '14', '16312911'),
+('A', '10', '16312912'),
+('A', '16', '16312913'),
+('B', '10', '16312914'),
+('D', '11', '16312915'),
+('C', '12', '16312916'),
+('C', '13', '16312917'),
+('C', '16', '16312918');

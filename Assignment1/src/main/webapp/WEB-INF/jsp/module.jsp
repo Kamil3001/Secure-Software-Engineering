@@ -46,6 +46,10 @@
                     <td>${module.id}</td>
                 </tr>
                 <tr>
+                    <th>Module Code:</th>
+                    <td>${module.moduleCode}</td>
+                </tr>
+                <tr>
                     <th>Coordinator Name:</th>
                     <td>${coordinator.name}</td>
                 </tr>

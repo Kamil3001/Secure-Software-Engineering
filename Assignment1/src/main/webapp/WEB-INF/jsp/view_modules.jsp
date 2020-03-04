@@ -26,6 +26,7 @@
             <table id="moduleTable">
                 <tr>
                     <th>Module ID</th>
+                    <th>Module Code</th>
                     <th>Module Name</th>
                     <th>Topics</th>
                 </tr>
@@ -33,6 +34,7 @@
                     <c:forEach var="module" items="${all_modules}">
                             <tr>
                                 <td>${module.id}</td>
+                                <td>${module.moduleCode}</td>
                                 <td>
                                     <a href="module/${module.id}">
                                         ${module.name}
