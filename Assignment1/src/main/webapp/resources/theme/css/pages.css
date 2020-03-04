@@ -300,8 +300,12 @@ table tr td {
     border-top: 1px solid #FFF;
 }
 
-.student-info tr td {
-    width: 100%;
+.profile-info tr td {
+    width: 75%;
+}
+
+.profile-info tr th {
+    width: 25%;
 }
 
 .siswebstyle {

@@ -1,9 +1,12 @@
 package com.mcino.assignment1.service;
 
+import com.mcino.assignment1.exception.CoordinatorNotFoundException;
 import com.mcino.assignment1.exception.StudentNotFoundException;
+import com.mcino.assignment1.model.Coordinator;
 import com.mcino.assignment1.model.Module;
 import com.mcino.assignment1.model.Student;
 import com.mcino.assignment1.model.StudentModule;
+import com.mcino.assignment1.repository.CoordinatorRepository;
 import com.mcino.assignment1.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,9 @@ public class MyProfileService {
 
     @Autowired
     StudentRepository studentRepository;
+
+    @Autowired
+    CoordinatorRepository coordinatorRepository;
 
     public Student retrieveStudent(long id) throws StudentNotFoundException {
         return studentRepository.findById(id)
@@ -48,5 +54,16 @@ public class MyProfileService {
         }
 
         return moduleGrades;
+    }
+
+    public Coordinator retrieveCoordinator(long coordId) throws CoordinatorNotFoundException {
+        return coordinatorRepository.findById(coordId)
+                .orElseThrow(() -> new CoordinatorNotFoundException(coordId));
+    }
+
+    public List<Module> retrieveCoordinatorsModules(long coordId) throws CoordinatorNotFoundException {
+        Coordinator coordinator = coordinatorRepository.findById(coordId)
+                .orElseThrow(() -> new CoordinatorNotFoundException(coordId));
+        return new ArrayList<>(coordinator.getModules());
     }
 }

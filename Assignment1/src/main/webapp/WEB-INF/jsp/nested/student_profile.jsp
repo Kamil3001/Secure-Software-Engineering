@@ -6,7 +6,7 @@
 <c:if test="${not student.feePaid}">
     <small class="red-info">NOTE: You have unpaid fees, click on My Registration below to pay your fees.</small>
 </c:if>
-<table class="student-info">
+<table class="profile-info">
     <tr>
         <th>Student ID:</th>
         <td>${student.id}</td>
