@@ -14,19 +14,23 @@
             <li><a href="statistics">Statistics</a></li>
             <li><a href="view_modules">Modules</a></li>
             <li><a href="my_profile">My Profile</a></li>
-            <c:if test="${sessionScope.role eq staff}">
-                <li><a href="staff">Staff Portal</a></li>
-            </c:if>
+<%--            <c:if test="${sessionScope.role eq staff}">--%>
+<%--                <li><a href="staff">Staff Portal</a></li>--%>
+<%--            </c:if>--%>
             <li><a href="logout">Logout</a></li>
         </c:if>
     </ul>
 </div>
 
 <script>
-    var page = window.location.pathname.split("/").pop();
+    var pathParts = window.location.pathname.split("/")
+    var page = pathParts.pop();
+    var pageIfModule = pathParts.pop();
     var list = document.getElementById("menu").children;
+    var aTag;
     for (var i = 0; i < list.length; i++) {
-        if (list[i].getElementsByTagName("a")[0].getAttribute("href") === page) {
+        aTag = list[i].getElementsByTagName("a")[0];
+        if (aTag.getAttribute("href") === page) {
             list[i].classList.add("selected");
             break;
         }

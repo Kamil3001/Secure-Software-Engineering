@@ -16,7 +16,26 @@
 <body>
 <div id="main">
     <div id="header">
-        <c:import url="nested/header.jsp"/>
+        <div id="logo">
+            <div id="logo_text">
+                <h1><a href="../home">MCINO<span class="logo_colour">moodle</span></a></h1>
+                <h2>Bringing students and staff together.</h2>
+            </div>
+        </div>
+        <div id="menubar">
+            <ul id="menu">
+                <li><a href="../home">Home</a></li>
+                <c:if test="${sessionScope.username != null}">
+                    <li><a href="../statistics">Statistics</a></li>
+                    <li><a href="../view_modules">Modules</a></li>
+                    <li><a href="../my_profile">My Profile</a></li>
+                    <%--            <c:if test="${sessionScope.role eq staff}">--%>
+                    <%--                <li><a href="staff">Staff Portal</a></li>--%>
+                    <%--            </c:if>--%>
+                    <li><a href="../logout">Logout</a></li>
+                </c:if>
+            </ul>
+        </div>
     </div>
     <div id="content_header"></div>
     <div id="site_content">
