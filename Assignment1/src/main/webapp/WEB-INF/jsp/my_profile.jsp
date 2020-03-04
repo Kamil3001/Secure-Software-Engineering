@@ -113,7 +113,7 @@
                                 <c:forEach var="module" items="${curr_modules}">
                                     <tr>
                                         <td>${module.id}</td>
-                                        <td>${module.name}</td>
+                                        <td><a href="/module/${module.id}">${module.name}</a></td>
                                         <td><a href="/students/${student.id}/drop/${module.id}">Drop</a></td>
                                     </tr>
                                 </c:forEach>
@@ -139,7 +139,7 @@
                                     <c:forEach var="entry" items="${moduleGradeMap}">
                                         <tr>
                                             <td>${entry.key}</td>
-                                            <td>${entry.value[0]}</td>
+                                            <td><a href="/module/${entry.key}">${entry.value[0]}</a></td>
                                             <td>${entry.value[1]}</td>
                                         </tr>
                                     </c:forEach>
