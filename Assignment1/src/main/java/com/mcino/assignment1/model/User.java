@@ -7,9 +7,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+/** @noinspection WeakerAccess*/
 @MappedSuperclass
 @Data
-abstract class User implements Serializable {
+public abstract class User implements Serializable {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)

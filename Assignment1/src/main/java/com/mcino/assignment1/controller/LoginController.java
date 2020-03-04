@@ -40,12 +40,14 @@ public class LoginController {
         session.setAttribute("username", username);
 
         long studentId = service.isStudent(c);
+        long coordinatorId = service.isStaff(c);
 
         if(studentId != -1) {
             session.setAttribute("role","student");
             session.setAttribute("id", studentId);
-        }else{
+        }else if (coordinatorId != -1){
             session.setAttribute("role", "staff");
+            session.setAttribute("id", coordinatorId);
         }
 
         return "redirect:home";

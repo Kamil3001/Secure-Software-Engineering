@@ -1,5 +1,6 @@
 package com.mcino.assignment1.controller;
 
+import com.mcino.assignment1.exception.CoordinatorNotFoundException;
 import com.mcino.assignment1.exception.ModuleNotFoundException;
 import com.mcino.assignment1.exception.StudentNotFoundException;
 import com.mcino.assignment1.model.Student;
@@ -38,9 +39,11 @@ public class WebController {
     @RequestMapping(value="/my_profile")
     public String showMyProfilePage(HttpSession session, ModelMap model) throws StudentNotFoundException {
         long studentId = (long) session.getAttribute("id");
-        model.addAttribute("student", myProfileService.retrieveStudent(studentId));
-        model.addAttribute("curr_modules", myProfileService.retrieveStudentsModules(studentId));
-        model.addAttribute("moduleGradeMap", myProfileService.retrieveTerminatedModules(studentId));
+        if (session.getAttribute("role").equals("student")) {
+            model.addAttribute("student", myProfileService.retrieveStudent(studentId));
+            model.addAttribute("curr_modules", myProfileService.retrieveStudentsModules(studentId));
+            model.addAttribute("moduleGradeMap", myProfileService.retrieveTerminatedModules(studentId));
+        }
         return "my_profile";
     }
 
@@ -55,8 +58,12 @@ public class WebController {
     }
 
     @RequestMapping(value="/module/{id}")
-    public String showModulePage(ModelMap model, @PathVariable(value = "id") long moduleId) throws ModuleNotFoundException {
+    public String showModulePage(HttpSession session, ModelMap model, @PathVariable(value = "id") long moduleId) throws ModuleNotFoundException, StudentNotFoundException, CoordinatorNotFoundException {
         model.addAttribute("module", moduleService.retrieveModuleById(moduleId));
+        model.addAttribute("numEnrolled", moduleService.retrieveEnrolledCount(moduleId));
+        model.addAttribute("coordinator", moduleService.retrieveCoordinator(moduleId));
+        if (session.getAttribute("role").equals("student"))
+            model.addAttribute("isEnrolled", moduleService.isEnrolled((long) session.getAttribute("id"), moduleId));
         return "module";
     }
 
@@ -64,6 +71,7 @@ public class WebController {
     public String logout(HttpSession session, SessionStatus status){
         session.removeAttribute("username");
         session.removeAttribute("role");
+        session.removeAttribute("id");
         status.setComplete();
         return "redirect:/";
     }

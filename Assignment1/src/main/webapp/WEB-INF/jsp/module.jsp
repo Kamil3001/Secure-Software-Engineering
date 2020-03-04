@@ -74,12 +74,21 @@
                     <td>${module.id}</td>
                 </tr>
                 <tr>
-                    <th>Coordinator Name</th>
-                    <td>TODO</td>
+                    <th>Coordinator Name:</th>
+                    <td>${coordinator.name}</td>
                 </tr>
                 <tr>
-                    <th>Is Ongoing:</th>
-                    <td>${!module.terminated}</td>
+                    <th>Module Status:</th>
+                    <td>
+                        <c:choose>
+                            <c:when test="${module.terminated}">
+                                Terminated
+                            </c:when>
+                            <c:otherwise>
+                                Active
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <%-- todo change this to show Active/Terminated instead --%>
                 </tr>
                 <tr>
@@ -88,17 +97,33 @@
                 </tr>
                 <tr>
                     <th>Number of Enrolled Students:</th>
-                    <td>TODO</td>
+                    <td>${numEnrolled}</td>
                 </tr>
                 <tr>
                     <th>Topics:</th>
                     <td>${module.topics}</td>
                 </tr>
             </table>
-            <%-- todo implement enrollment button if student logged in and capacity not reached --%>
-            <%-- todo add grade distribution display for previous editions of the module --%>
-            <button>Enroll</button>
+            <c:if test="${sessionScope.id != null}">
+                <c:choose>
+                    <c:when test="${sessionScope.role eq 'staff' and coordinator.id == module.coordinatorId}">
+                        TODO: IMPLEMENT DETAILS UPDATE
+                    </c:when>
+                    <c:when test="${module.terminated}">
+                        This module has terminated.
+                    </c:when>
+                    <c:when test="${sessionScope.role eq 'student' and numEnrolled < module.capacity and not isEnrolled}">
+                        <button onclick="window.location.href = '/modules/${module.id}/enroll/${sessionScope.id}';">
+                            Enroll
+                        </button>
+                    </c:when>
+                    <c:when test="${sessionScope.role eq 'student'}">
+                        You are currently enrolled to this module.
+                    </c:when>
+                </c:choose>
+            </c:if>
             <h2>Grade Distributions</h2>
+            <%-- todo add grade distribution display for previous editions of the module --%>
         </div>
     </div>
     <div id="content_footer"></div>

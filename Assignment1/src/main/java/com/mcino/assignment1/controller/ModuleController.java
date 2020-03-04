@@ -60,6 +60,6 @@ public class ModuleController {
         module.addStudent(student);
         em.persist(module);
 
-        return "redirect:/view_modules";
+        return "redirect:/module/"+moduleId;
     }
 }
