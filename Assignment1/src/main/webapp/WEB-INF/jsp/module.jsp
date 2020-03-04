@@ -107,7 +107,7 @@
             <c:if test="${sessionScope.id != null}">
                 <c:choose>
                     <c:when test="${sessionScope.role eq 'staff' and coordinator.id == module.coordinatorId}">
-                        TODO: IMPLEMENT DETAILS UPDATEE
+                        TODO: IMPLEMENT DETAILS UPDATE
                     </c:when>
                     <c:when test="${module.terminated}">
                         This module has terminated.
