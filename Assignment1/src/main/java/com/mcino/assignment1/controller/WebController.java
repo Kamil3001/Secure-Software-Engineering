@@ -92,7 +92,7 @@ public class WebController {
         status.setComplete();
         return "redirect:/";
     }
-
+//
     private JSONObject getNationalityStatistics(){
         Query queryStudent = em.createNativeQuery("SELECT nationality, COUNT(*) as total FROM students GROUP BY nationality", NationalityQueryHelper.class);
         Query queryStaff = em.createNativeQuery("SELECT nationality, COUNT(*) as total FROM coordinators GROUP BY nationality", NationalityQueryHelper.class);
