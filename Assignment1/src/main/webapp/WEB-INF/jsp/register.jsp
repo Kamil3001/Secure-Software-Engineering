@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -9,40 +10,43 @@
 <body>
 <div class="registration">
     <p class="sign" align="center">Registration</p>
-    <form  method="post">
+    <p class="error" align="center">${error}</p>
+    <form:form modelAttribute="student" method="post" action="/register">
         <label>
-            <input class="userInput" type="text" align="center" name="username" placeholder="Username*">
+            <form:input class="userInput" path="credentials.username" type="text" align="center" placeholder="Username*"/>
         </label>
         <label>
-            <input class="userInput" type="password" align="center" name="password" placeholder="Password*">
+            <form:input class="userInput" path="credentials.password" type="password" align="center" placeholder="Password*"/>
         </label>
         <label>
-            <input class="userInput" type="text" align="center" name="name" placeholder="First Name*">
+            <form:input class="userInput" path="name" type="text" align="center" placeholder="First Name*"/>
         </label>
         <label>
-            <input class="userInput" type="text" align="center" name="surname" placeholder="Surname*">
+            <form:input class="userInput" path="surname" type="text" align="center" placeholder="Surname*"/>
         </label>
         <label>
-            <input class="userInput" type="text" align="center" name="nationality" placeholder="Nationality*">
+            <form:input class="userInput" path="nationality" type="text" align="center" placeholder="Nationality*"/>
         </label>
         <label>
-            <input class="userInput" type="text" align="center" name="gender" placeholder="Gender (M/F)*">
+            <form:select class="userInput" path="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </form:select>
         </label>
         <label>
-            <input class="userInput" type="text" align="center" name="studentid" placeholder="Student ID*">
+            <form:input class="userInput" path="id" type="number" align="center" placeholder="Student ID*"/>
         </label>
         <label>
-            <input class="userInput" type="text" align="center" name="address" placeholder="Address*">
+            <form:input class="userInput" path="address" type="text" align="center" placeholder="Address*"/>
         </label>
         <label>
-            <input class="userInput" type="text" align="center" name="phonenumber" placeholder="Phone Number*">
+            <form:input class="userInput" path="phoneNum" type="text" align="center" placeholder="Phone Number*"/>
         </label>
         <label>
-            <input class="userInput" type="email" align="center" name="email" placeholder="Email*">
+            <form:input class="userInput" path="email" type="email" align="center" placeholder="Email*"/>
         </label>
         <input class="submit" type="submit" align="center" value="Register"/>
-        <p class="error" align="center">${error}</p>
-    </form>
+    </form:form>
 </div>
 
 </body>

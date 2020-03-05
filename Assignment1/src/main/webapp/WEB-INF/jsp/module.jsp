@@ -155,10 +155,18 @@
                         </div>
                     </c:when>
 
-                    <c:when test="${sessionScope.role eq 'student' and numEnrolled < module.capacity and not isEnrolled}">
+                    <c:when test="${sessionScope.role eq 'student' and feesPaid and numEnrolled lt module.capacity and not isEnrolled and not module.terminated}">
                         <button onclick="window.location.href = '/modules/${module.id}/enroll/${sessionScope.id}';">
                             Enroll
                         </button>
+                    </c:when>
+
+                    <c:when test="${module.terminated}">
+                        This offering has terminated.
+                    </c:when>
+
+                    <c:when test="${sessionScope.role eq 'student' and not feesPaid}">
+                        <div class="red-info">You have unpaid fees. Please pay your fees in My Profile to enroll to modules.</div>
                     </c:when>
 
                     <c:when test="${sessionScope.role eq 'student'}">

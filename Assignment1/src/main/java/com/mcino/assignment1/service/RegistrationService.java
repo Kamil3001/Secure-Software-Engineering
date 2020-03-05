@@ -19,70 +19,55 @@ public class RegistrationService {
     @Autowired
     CredentialsRepository credentialsRepository;
 
-    public FormValidationInformation check(String username,  String password, String name,
-                           String surname,
-                           String nationality,
-                           String gender,
-                           String studentid,
-                           String address,
-                           String phonenumber,
-                           String email){
+    public FormValidationInformation check(Student student){
 
         FormValidationInformation fvi = new FormValidationInformation();
 
         String nameRegex = "^[\\p{L}’\\-]+$";
         String usernameRegex = "^[\\p{Alnum}]{8,}$"; // alphanumeric with at least 8 characters
         String passwordRegex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!?])(?=\\S+$).{8,}$"; // at least one digit
-                                                                                                    // at least one lower case
-                                                                                                    // at least one upper case
-                                                                                                    // at least one special character
-                                                                                                    // no whitespace
-                                                                                                    // at least 8 characters
+        // at least one lower case
+        // at least one upper case
+        // at least one special character
+        // no whitespace
+        // at least 8 characters
 
-        if(!username.matches(usernameRegex)){
+        if(!student.getCredentials().getUsername().matches(usernameRegex)){
             fvi.setValid(false);
-            if(username.length() < 8) {
+            if(student.getCredentials().getUsername().length() < 8) {
                 fvi.setMessage("Username must be at least 8 characters long");
             }else{
                 fvi.setMessage("Username must contain only alphanumeric characters");
             }
             return fvi;
         }
-        else if(!password.matches(passwordRegex)){
+        else if(!student.getCredentials().getPassword().matches(passwordRegex)){
             fvi.setValid(false);
             fvi.setMessage("Password must have at least 1 of each - [0-9][a-z][A-Z][@#$%^!&+?=], and be " +
                     "at least 8 characters in length");
             return fvi;
         }
-        else if(!name.matches(nameRegex) || !surname.matches(nameRegex)){
+        else if(!student.getName().matches(nameRegex) || !student.getSurname().matches(nameRegex)){
             fvi.setValid(false);
             fvi.setMessage("Name or surname not valid");
             return fvi;
         }
-        else if(address.isEmpty() || email.isEmpty() || nationality.isEmpty()){
+        else if(student.getAddress().isEmpty() || student.getEmail().isEmpty() || student.getNationality().isEmpty()){
             fvi.setValid(false);
             fvi.setMessage("Some fields are empty");
             return fvi;
-        }else if(phonenumber.length() < 10){
+        }else if(student.getPhoneNum().length() < 10){
             fvi.setValid(false);
             fvi.setMessage("Invalid phone number");
-        }else if(gender.isEmpty() || gender.charAt(0) != 'M' || gender.charAt(0) != 'F'){
+        }else if(student.getGender().isEmpty() || student.getGender().charAt(0) != 'M' || student.getGender().charAt(0) != 'F'){
             fvi.setValid(false);
             fvi.setMessage("Ensure you fill the gender field correctly.");
         }
 
-        try {
-            Long.parseLong(studentid);
-        }catch(Exception e){
-            fvi.setValid(false);
-            fvi.setMessage("Invalid student ID, make sure it consists of digits only");
-            return fvi;
-        }
-
         //All information is valid, now check if some entries already exist
-        Optional<Student> existingStudentId = studentRepository.findById(Long.parseLong(studentid));
-        Student existingEmail = studentRepository.findByEmail(email);
-        Credential existingUsername = credentialsRepository.findByUsername(username);
+        Optional<Student> existingStudentId = studentRepository.findById(student.getId());
+        Student existingEmail = studentRepository.findByEmail(student.getEmail());
+        Credential existingUsername = credentialsRepository.findByUsername(student.getCredentials().getUsername());
 
         if(existingStudentId.isPresent()){
             fvi.setValid(false);

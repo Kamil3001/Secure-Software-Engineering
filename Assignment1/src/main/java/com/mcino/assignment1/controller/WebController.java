@@ -71,12 +71,14 @@ public class WebController {
     }
 
     @RequestMapping(value="/module/{id}")
-    public String showModulePage(HttpSession session, ModelMap model, @PathVariable(value = "id") long moduleId) throws ModuleNotFoundException, CoordinatorNotFoundException {
+    public String showModulePage(HttpSession session, ModelMap model, @PathVariable(value = "id") long moduleId) throws ModuleNotFoundException, CoordinatorNotFoundException, StudentNotFoundException {
         model.addAttribute("module", moduleService.retrieveModuleById(moduleId));
         model.addAttribute("numEnrolled", moduleService.retrieveEnrolledCount(moduleId));
         model.addAttribute("coordinator", moduleService.retrieveCoordinator(moduleId));
-        if (session.getAttribute("role").equals("student"))
+        if (session.getAttribute("role").equals("student")) {
             model.addAttribute("isEnrolled", moduleService.isEnrolled((long) session.getAttribute("id"), moduleId));
+            model.addAttribute("feesPaid", myProfileService.retrieveStudent((long)session.getAttribute("id")).isFeePaid());
+        }
         else if (session.getAttribute("role").equals("staff")) {
             model.addAttribute("studentModules", moduleService.retrieveStudentModules(moduleId));
             model.addAttribute("gradeChoices", new String[] {"", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "E+", "E", "E-", "F+", "F", "F-", "NG"});
@@ -92,7 +94,7 @@ public class WebController {
         status.setComplete();
         return "redirect:/";
     }
-//
+
     private JSONObject getNationalityStatistics(){
         Query queryStudent = em.createNativeQuery("SELECT nationality, COUNT(*) as total FROM students GROUP BY nationality", NationalityQueryHelper.class);
         Query queryStaff = em.createNativeQuery("SELECT nationality, COUNT(*) as total FROM coordinators GROUP BY nationality", NationalityQueryHelper.class);

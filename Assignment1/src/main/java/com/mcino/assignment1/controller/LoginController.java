@@ -37,6 +37,7 @@ public class LoginController {
         }
         session.setAttribute("username", username);
 
+        //student and staff won't have the same ids so set session based on that
         long studentId = service.isStudent(c);
         long coordinatorId = service.isStaff(c);
 

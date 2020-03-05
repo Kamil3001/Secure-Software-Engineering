@@ -31,6 +31,7 @@ public class ModuleController {
         Module module = moduleRepository.findById(moduleId)
                 .orElseThrow(() -> new ModuleNotFoundException(moduleId));
 
+        // Only capacity, name and topics can be modified
         module.setCapacity(moduleDetails.getCapacity());
         module.setName(moduleDetails.getName());
         module.setTopics(moduleDetails.getTopics());
@@ -50,13 +51,14 @@ public class ModuleController {
         return "redirect:/module/"+moduleId;
     }
 
-    @Transactional
+    @Transactional // needed EntityManager to get this working
     @RequestMapping("/{module_id}/enroll/{student_id}")
     public String enrollToModule(@PathVariable(value = "module_id") Long moduleId, @PathVariable(value = "student_id") Long studentId) {
+        // to modify studentModule lists we need to modify the specific reference of Module hence EntityManager
         Module module = em.getReference(Module.class, moduleId);
         Student student = em.getReference(Student.class, studentId);
         module.addStudent(student);
-        em.persist(module);
+        em.persist(module); // persist -> save for repository
 
         return "redirect:/module/"+moduleId;
     }

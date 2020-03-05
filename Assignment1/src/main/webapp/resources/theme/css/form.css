@@ -4,8 +4,7 @@ body {
 
 .login, .registration{
     background-color: #FFFFFF;
-    width: 400px;
-    height: 410px;
+    width: 70%;
     margin: 7em auto;
     border-radius: 1.5em;
     box-shadow: 0 11px 35px 2px rgba(0, 0, 0, 0.14);
@@ -13,7 +12,6 @@ body {
 }
 
 .registration {
-    height: 780px;
 }
 
 .sign {
@@ -24,7 +22,7 @@ body {
 }
 
 .userInput {
-    width: 76%;
+    width: 75%;
     color: rgb(38, 50, 56);
     font-weight: 700;
     font-size: 14px;
@@ -37,7 +35,6 @@ body {
     border: 2px solid rgba(0, 0, 0, 0.02);
     margin-bottom: 25px;
     margin-left: 46px;
-    text-align: center;
 }
 
 .register{
@@ -47,7 +44,7 @@ body {
 }
 
 form {
-    padding-top: 40px;
+    padding-top: 1em;
 }
 
 
@@ -56,15 +53,18 @@ form {
 }
 
 .submit {
+    width: 75%;
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
     background: linear-gradient(to right, #007EA7, #80CED7);
     border: 0;
     padding: 10px 40px;
-    margin-left: 35%;
-    font-size: 13px;
+    font-size: 16px;
+    font-weight: bold;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    margin-left: 46px;
+    margin-bottom: 25px;
 }
 a {
     text-shadow: 0 0 3px rgba(117, 117, 117, 0.12);
@@ -72,16 +72,26 @@ a {
     text-decoration: none
 }
 
-.error{
+.error {
     font-size: 15px;
     color: #FF0000;
-    text-decoration: none
+    text-decoration: none;
 }
 
-.success{
+.success {
     font-size: 15px;
     color: #18ff00;
     text-decoration: none
 }
 
+.userInput::-webkit-outer-spin-button,
+.userInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.userInput[type=number] {
+    -moz-appearance:textfield;
+}
 /*Color scheme: https://coolors.co/ccdbdc-9ad1d4-80ced7-007ea7-003249*/
