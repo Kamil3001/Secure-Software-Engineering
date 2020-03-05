@@ -58,7 +58,7 @@ public class ModuleService {
         return false;
     }
 
-    public StudentGradesForm retrieveStudentModules(long moduleId) {
+    public StudentGradesForm retrieveStudentGradesForm(long moduleId) {
         List<StudentModule> studentModules = studentModuleRepository.findByModuleId(moduleId);
 
         List<StudentGrade> studentGrades = new ArrayList<>();

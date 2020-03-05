@@ -28,60 +28,11 @@ public class RegisterController {
         return "register";
     }
 
-//    @PostMapping(value="/register")
-//    public String showLoginPage(ModelMap model, @RequestParam String username, @RequestParam String password,
-//                                @RequestParam String name,
-//                                @RequestParam String surname,
-//                                @RequestParam String nationality,
-//                                @RequestParam String gender,
-//                                @RequestParam String studentid,
-//                                @RequestParam String address,
-//                                @RequestParam String phonenumber,
-//                                @RequestParam String email){
-//
-//        FormValidationInformation fvi = service.check(username, password, name, surname, nationality, gender, studentid, address, phonenumber, email);
-//        if(!fvi.isValid()){
-//            model.addAttribute("error", fvi.getMessage());
-//            return "register";
-//        } else{
-//            model.addAttribute("success", fvi.getMessage());
-//        }
-//
-//        if(gender.equals("M")){
-//            gender = "Male";
-//        }else if(gender.equals("F")){
-//            gender = "Female";
-//        }
-//
-//        Credential newCredentials = new Credential();
-//        newCredentials.setUsername(username);
-//        newCredentials.setPassword(password);
-//
-//        Student newStudent = new Student();
-//        newStudent.setId(Long.parseLong(studentid));
-//        newStudent.setCredentials(newCredentials);
-//        newStudent.setName(name);
-//        newStudent.setSurname(surname);
-//        newStudent.setNationality(nationality);
-//        newStudent.setGender(gender);
-//        newStudent.setEmail(email);
-//        newStudent.setFeePaid(false);
-//        newStudent.setAddress(address);
-//        newStudent.setPhoneNum(phonenumber);
-//
-//        studentRepository.save(newStudent);
-//
-//
-//        return "redirect:/";
-//    }
-
     @PostMapping(value="/register")
     public String showLoginPage(ModelMap model,
                                 @Valid @ModelAttribute("student") Student student){
-        System.out.println(student.toString() + " " + student.getCredentials().toString());
         FormValidationInformation fvi = service.check(student);
         if(!fvi.isValid()){
-            System.out.println("Not Valid");
             model.addAttribute("error", fvi.getMessage());
             return "register";
         } else{

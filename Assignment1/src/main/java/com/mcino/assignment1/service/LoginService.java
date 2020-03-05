@@ -26,6 +26,7 @@ public class LoginService {
         return findCredentials != null;
     }
 
+    // Check if given credentials belong to a student
     public long isStudent(Credential c){
         Student student = studentRepository.findByCredentials(c);
         if(student == null)
@@ -33,6 +34,7 @@ public class LoginService {
         return student.getId();
     }
 
+    // Check if given credentials belong to a coordinator
     public long isStaff(Credential c) {
         Coordinator coordinator = coordinatorRepository.findByCredentials(c);
         if(coordinator == null)
