@@ -35,7 +35,6 @@ public class WebController {
 
     @RequestMapping(value="/home")
     public String showHomePage(ModelMap model){
-
         return "home";
     }
 
@@ -78,6 +77,10 @@ public class WebController {
         model.addAttribute("coordinator", moduleService.retrieveCoordinator(moduleId));
         if (session.getAttribute("role").equals("student"))
             model.addAttribute("isEnrolled", moduleService.isEnrolled((long) session.getAttribute("id"), moduleId));
+        else if (session.getAttribute("role").equals("staff")) {
+            model.addAttribute("studentModules", moduleService.retrieveStudentModules(moduleId));
+            model.addAttribute("gradeChoices", new String[] {"", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "E+", "E", "E-", "F+", "F", "F-", "NG"});
+        }
         return "module";
     }
 

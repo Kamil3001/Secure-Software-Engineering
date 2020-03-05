@@ -23,33 +23,29 @@ public class ModuleController {
     @Autowired
     private EntityManager em;
 
-//    @GetMapping
-//    public List<Module> getAllModules() {
-//        return moduleRepository.findAll();
-//    }
-
-//    @RequestMapping("/{id}")
-//    public String getModuleById(ModelMap model, @PathVariable(value = "id") Long moduleId) throws ModuleNotFoundException {
-//        Module module = moduleRepository.findById(moduleId)
-//                .orElseThrow(() -> new ModuleNotFoundException(moduleId));
-//        model.addAttribute("module", module);
-//        System.out.println(module.toString());
-//        return "redirect:/module";
-//    }
-
-    @PutMapping("/{id}/update")
-    public Module updateModuleDetails(@PathVariable(value = "id") Long moduleId,
-                                      @Valid @RequestBody Module moduleDetails) throws ModuleNotFoundException {
+    @PostMapping("/{id}/update")
+    public String updateModuleDetails(@PathVariable(value = "id") Long moduleId,
+                                      @Valid @ModelAttribute("module") Module moduleDetails) throws ModuleNotFoundException {
         Module module = moduleRepository.findById(moduleId)
                 .orElseThrow(() -> new ModuleNotFoundException(moduleId));
 
         module.setCapacity(moduleDetails.getCapacity());
-        module.setCoordinatorId(moduleDetails.getCoordinatorId());
         module.setName(moduleDetails.getName());
-        module.setTerminated(moduleDetails.isTerminated());
         module.setTopics(moduleDetails.getTopics());
 
-        return moduleRepository.save(module);
+        moduleRepository.save(module);
+
+        return "redirect:/module/"+moduleId;
+    }
+
+    @RequestMapping("/{id}/terminate")
+    public String terminateModule(@PathVariable(value = "id") Long moduleId) throws ModuleNotFoundException {
+        Module module = moduleRepository.findById(moduleId)
+                .orElseThrow(() -> new ModuleNotFoundException(moduleId));
+
+        module.setTerminated(true);
+        moduleRepository.save(module);
+        return "redirect:/module/"+moduleId;
     }
 
     @Transactional

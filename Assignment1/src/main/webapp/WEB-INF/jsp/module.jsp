@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML>
 <html>
 
@@ -38,61 +39,128 @@
     <div id="site_content">
         <c:import url="nested/sidebar.jsp"/>
         <div id="content">
-            <!-- insert the page content here -->
             <h1>${module.name}</h1>
-            <table class="student-info">
-                <tr>
-                    <th>Module ID:</th>
-                    <td>${module.id}</td>
-                </tr>
-                <tr>
-                    <th>Module Code:</th>
-                    <td>${module.moduleCode}</td>
-                </tr>
-                <tr>
-                    <th>Coordinator Name:</th>
-                    <td>${coordinator.name}</td>
-                </tr>
-                <tr>
-                    <th>Module Status:</th>
-                    <td>
-                        <c:choose>
-                            <c:when test="${module.terminated}">
-                                Terminated
-                            </c:when>
-                            <c:otherwise>
-                                Active
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
-                    <%-- todo change this to show Active/Terminated instead --%>
-                </tr>
-                <tr>
-                    <th>Capacity:</th>
-                    <td>${module.capacity}</td>
-                </tr>
-                <tr>
-                    <th>Number of Enrolled Students:</th>
-                    <td>${numEnrolled}</td>
-                </tr>
-                <tr>
-                    <th>Topics:</th>
-                    <td>${module.topics}</td>
-                </tr>
-            </table>
+            <c:choose>
+                <c:when test="${sessionScope.role eq 'staff' and coordinator.id eq sessionScope.id and not module.terminated}">
+                    <form:form modelAttribute="module" method="post" action="/modules/${module.id}/update/"> <%-- method="post" modelAttribute="studentModules" action="/grades/${module.id}/update/"--%>
+                        <table class="profile-info">
+                            <tr>
+                                <th>Module Code:</th>
+                                <td>${module.moduleCode}</td>
+                                <form:input path="moduleCode" value="${module.moduleCode}" type="hidden"/>
+                            </tr>
+                            <tr>
+                                <th>Module Name:</th>
+                                <td><form:input path="name" value="${module.name}" type="text"/></td>
+                            </tr>
+                            <tr>
+                                <th>Coordinator Name:</th>
+                                <td>${coordinator.name} ${coordinator.surname} ${coordinator.id} ${module.coordinatorId}</td>
+                            </tr>
+                            <tr>
+                                <th>Module Status:</th>
+                                <td>Active <a style="float:right;" href="../modules/${module.id}/terminate">Terminate?</a></td>
+                            </tr>
+                            <tr>
+                                <th>Capacity:</th>
+                                <td><form:input path="capacity" value="${module.capacity}" type="number"/></td>
+                            </tr>
+                            <tr>
+                                <th>Number of Enrolled Students:</th>
+                                <td>${numEnrolled}</td>
+                            </tr>
+                            <tr>
+                                <th>Topics:</th>
+                                <td><form:input path="topics" value="${module.topics}"/></td>
+                            </tr>
+                        </table>
+                        <button type="submit">Update Details</button>
+                    </form:form>
+                </c:when>
+                <c:otherwise>
+                    <table class="profile-info">
+                        <tr>
+                            <th>Module Code:</th>
+                            <td>${module.moduleCode}</td>
+                        </tr>
+                        <tr>
+                            <th>Coordinator Name:</th>
+                            <td>${coordinator.name} ${coordinator.surname}</td>
+                        </tr>
+                        <tr>
+                            <th>Module Status:</th>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${module.terminated}">
+                                        Terminated
+                                    </c:when>
+                                    <c:otherwise>
+                                        Active
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Capacity:</th>
+                            <td>${module.capacity}</td>
+                        </tr>
+                        <tr>
+                            <th>Number of Enrolled Students:</th>
+                            <td>${numEnrolled}</td>
+                        </tr>
+                        <tr>
+                            <th>Topics:</th>
+                            <td>${module.topics}</td>
+                        </tr>
+                    </table>
+                </c:otherwise>
+            </c:choose>
+
             <c:if test="${sessionScope.id != null}">
                 <c:choose>
-                    <c:when test="${sessionScope.role eq 'staff' and coordinator.id == module.coordinatorId}">
-                        TODO: IMPLEMENT DETAILS UPDATE
+                    <c:when test="${sessionScope.role eq 'staff' and coordinator.id == module.coordinatorId and module.terminated}">
+                        <button type="button" class="collapsible">Grading</button>
+                        <div class="collapsible-content">
+                            <c:choose>
+                                <c:when test="${studentModules != null}">
+                                    <form:form method="post" modelAttribute="studentModules" action="/grades/${module.id}/update/"> <%-- Ignore the error on studentModules, it's wrong --%>
+                                        <table>
+                                            <tr>
+                                                <th>Student ID</th>
+                                                <th>Student Name</th>
+                                                <th>Grade</th>
+                                            </tr>
+                                            <c:forEach var="entry" items="${studentModules.studentGrades}" varStatus="status">
+                                                <tr>
+                                                    <td>${entry.studentId}</td>
+                                                    <td>${entry.studentFullName}</td>
+                                                    <td>
+                                                        <form:input path="studentGrades[${status.index}].studentId" type="hidden" value="${entry.studentId}"/>
+                                                        <form:select path="studentGrades[${status.index}].grade">
+                                                            <c:forEach var="opt" items="${gradeChoices}">
+                                                                <option value="${opt}" ${opt eq entry.grade ? "selected" : ""}>${opt}</option>
+                                                            </c:forEach>
+                                                        </form:select>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </table>
+                                        <button type="submit">Save Grades</button>
+                                    </form:form>
+                                </c:when>
+                                <c:otherwise>
+                                    <h3>Uh-oh... Looks like nobody wanted to enrolled on last offering</h3>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
                     </c:when>
-                    <c:when test="${module.terminated}">
-                        This module has terminated.
-                    </c:when>
+
                     <c:when test="${sessionScope.role eq 'student' and numEnrolled < module.capacity and not isEnrolled}">
                         <button onclick="window.location.href = '/modules/${module.id}/enroll/${sessionScope.id}';">
                             Enroll
                         </button>
                     </c:when>
+
                     <c:when test="${sessionScope.role eq 'student'}">
                         You are currently enrolled to this module.
                     </c:when>
@@ -108,4 +176,20 @@
     </div>
 </div>
 </body>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+</script>
 </html>

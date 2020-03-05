@@ -1,5 +1,7 @@
 package com.mcino.assignment1.service;
 
+import com.mcino.assignment1.Utils.StudentGrade;
+import com.mcino.assignment1.Utils.StudentGradesForm;
 import com.mcino.assignment1.exception.CoordinatorNotFoundException;
 import com.mcino.assignment1.exception.ModuleNotFoundException;
 import com.mcino.assignment1.exception.StudentModuleNotFoundException;
@@ -12,6 +14,8 @@ import com.mcino.assignment1.repository.StudentModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -54,5 +58,23 @@ public class ModuleService {
                 return true;
         }
         return false;
+    }
+
+    public StudentGradesForm retrieveStudentModules(long moduleId) {
+        List<StudentModule> studentModules = studentModuleRepository.findByModuleId(moduleId);
+
+        List<StudentGrade> studentGrades = new ArrayList<>();
+        StudentGrade sg;
+        for(StudentModule sm : studentModules) {
+            sg = new StudentGrade();
+            sg.setStudentId(sm.getStudentId());
+            sg.setModuleId(sm.getModuleId());
+            sg.setGrade(sm.getGrade());
+            sg.setStudentFullName(sm.getStudent().getName() + " " + sm.getStudent().getSurname());
+            studentGrades.add(sg);
+        }
+        StudentGradesForm sgf = new StudentGradesForm();
+        sgf.setStudentGrades(studentGrades);
+        return sgf;
     }
 }
