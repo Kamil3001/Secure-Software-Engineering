@@ -4,7 +4,6 @@ import com.mcino.assignment1.Utils.StudentGrade;
 import com.mcino.assignment1.Utils.StudentGradesForm;
 import com.mcino.assignment1.exception.CoordinatorNotFoundException;
 import com.mcino.assignment1.exception.ModuleNotFoundException;
-import com.mcino.assignment1.exception.StudentModuleNotFoundException;
 import com.mcino.assignment1.model.Coordinator;
 import com.mcino.assignment1.model.Module;
 import com.mcino.assignment1.model.StudentModule;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service

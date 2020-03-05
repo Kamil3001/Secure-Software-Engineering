@@ -1,5 +1,4 @@
 <div class="sidebar">
-    <!-- insert your sidebar items here -->
     <h3>Latest News</h3>
     <h4>New Website Launched</h4>
     <h5>March 6th, 2020</h5>

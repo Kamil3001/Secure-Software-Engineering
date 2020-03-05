@@ -20,7 +20,6 @@
     <div id="site_content">
         <c:import url="nested/sidebar.jsp"/>
         <div id="content">
-            <!-- insert the page content here -->
             <h1>Available Modules</h1>
             <input type="text" id="searchInput" onkeyup="searchTopics()" placeholder="Search for topics..">
             <table id="moduleTable">
