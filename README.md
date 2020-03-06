@@ -23,24 +23,31 @@
 
 
 ## Distribution of Tasks
-###### Kamil Cierpisz -> @Kamil3001
-* Item 1
-* Item 1
-* Item 1
-* Item 1
-* Item 1
+###### Kamil Cierpisz
+* Initialized the repository
+* Worked on setting up mySQL DB w/ Nikolaj and Temitope
+* Set up the models of the SpringBoot application to resemble database
+* Worked on getting the JPA functionality using the model
+* Modified models to reflect changes during the development
+* Fixed up the frontend look and feel to be more responsive
+* Implemented My Profile page for students displaying modules w/ enrollment, paying fees and cancelling registration functionality
+* Implemented Modules page displaying Module list w/ a filter search bar
+* Added Module pages for each module with basic info and linked to them from Modules and My Profile pages
+* Wrote up this beautiful README
 
-###### Nikolaj Jasenko -> @fragbaws
-* Item 1
-* Item 1
-* Item 1
-* Item 1
-* Item 1
+###### Nikolaj Jasenko
+* Worked on setting up MySQL DB w/ Kamil and Temitope
+* Set up the Frontend of the application using JSPs
+* Found and edited a suitable website template
+* Implemented login and registration functionalities
+* Added database intialization instruction on WebApp start-up and modified as the model changed
+* Helped Temitope with d3 visuals for Male/Female % and Nationality %
+* Worked on visualizing grade distributions for modules
 
-###### Temitope Akinwale -> @Topeakin1
-* Item 1
-* Item 1
-* Item 1
-* Item 1
-* Item 1
-
+###### Temitope Akinwale
+* Worked on setting up MySQL DB w/ Kamil and Nikolaj
+* Performed refactorings to optimize front-end changes by taking out repetitive parts of each jsp into separate files
+* Performed other front-end changes to reflect assignment brief
+* Removed My Staff Portal and instead implemented a Staff specific My Profile page
+* Worked on adding d3 visuals with Nikolaj to display Male/Female % and Nationality % in Statistic page
+* Modified model to add gender for the above statistics
