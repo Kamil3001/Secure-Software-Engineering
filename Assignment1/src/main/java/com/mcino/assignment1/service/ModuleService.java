@@ -1,5 +1,7 @@
 package com.mcino.assignment1.service;
 
+import com.mcino.assignment1.Utils.GradeQueryHelper;
+import com.mcino.assignment1.Utils.NationalityQueryHelper;
 import com.mcino.assignment1.Utils.StudentGrade;
 import com.mcino.assignment1.Utils.StudentGradesForm;
 import com.mcino.assignment1.exception.CoordinatorNotFoundException;
@@ -10,11 +12,14 @@ import com.mcino.assignment1.model.StudentModule;
 import com.mcino.assignment1.repository.CoordinatorRepository;
 import com.mcino.assignment1.repository.ModuleRepository;
 import com.mcino.assignment1.repository.StudentModuleRepository;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.*;
 
 @Service
 public class ModuleService {
@@ -27,6 +32,9 @@ public class ModuleService {
 
     @Autowired
     CoordinatorRepository coordinatorRepository;
+
+    @PersistenceContext
+    EntityManager em;
 
     public List<Module> retrieveAllModules() {
         return moduleRepository.findAll();
@@ -74,5 +82,51 @@ public class ModuleService {
         StudentGradesForm sgf = new StudentGradesForm();
         sgf.setStudentGrades(studentGrades);
         return sgf;
+    }
+
+    public JSONObject retrieveGradesFromPreviousEdition(long moduleId){
+        Optional<Module> module = moduleRepository.findById(moduleId);
+        JSONObject json = new JSONObject();
+        if(module.isPresent()){
+            String moduleCode = module.get().getModuleCode();
+            List<Module> modules = moduleRepository.findAllByModuleCode(moduleCode);
+            if(!modules.isEmpty()){
+                HashMap<String, Integer> gradeCounts = new HashMap<>();
+                ArrayList<GradeQueryHelper> gradeResults = new ArrayList<>();
+                for(Module m: modules) {
+                    Query queryGrades = em.createNativeQuery("SELECT grade, COUNT(*) as total FROM student_module WHERE module_id='" + m.getId() + "' AND grade<>'' GROUP BY grade;", GradeQueryHelper.class);
+                    ArrayList<GradeQueryHelper> tmpBuffer = (ArrayList<GradeQueryHelper>) queryGrades.getResultList();
+                    if(!tmpBuffer.isEmpty()) {
+                        gradeResults.addAll(queryGrades.getResultList());
+                    }
+                }
+                if(!gradeResults.isEmpty()) {
+                    // grouping all the grades
+                    for (GradeQueryHelper g : gradeResults) {
+                        String grade = g.getGrade();
+                        int total = g.getTotal();
+                        if(gradeCounts.containsKey(grade)){
+                            gradeCounts.put(grade, gradeCounts.get(grade) + total);
+                        }else{
+                            gradeCounts.put(grade, total);
+                        }
+                    }
+                    for(Map.Entry e: gradeCounts.entrySet()){
+                        json.put(String.valueOf(e.getKey()), e.getValue());
+                    }
+                }else{
+                    // no previous grades for the module
+                    return null;
+                }
+            }else{
+                // error
+                return null;
+            }
+        }else{
+            // error
+            return null;
+        }
+
+        return json;
     }
 }

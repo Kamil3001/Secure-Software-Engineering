@@ -84,6 +84,11 @@ public class WebController {
             model.addAttribute("studentModules", moduleService.retrieveStudentGradesForm(moduleId));
             model.addAttribute("gradeChoices", new String[] {"", "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "D-", "E+", "E", "E-", "F+", "F", "F-", "NG"});
         }
+
+        JSONObject grades = moduleService.retrieveGradesFromPreviousEdition(moduleId);
+        model.addAttribute("moduleGrades", grades);
+
+
         return "module";
     }
 

@@ -103,7 +103,6 @@
             <script src="https://d3js.org/d3.v4.js"></script>
 
             <script>
-                d3.select('h2').attr('align',"center");
                 d3.select('h3').style('color', 'darkblue');
                 d3.select('h3').style('font-size', '24px');
                 d3.select('h3').attr('align',"center");
