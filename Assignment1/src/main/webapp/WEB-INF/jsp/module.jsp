@@ -174,8 +174,10 @@
                     </c:when>
                 </c:choose>
             </c:if>
-            <h2>Grade Distributions</h2>
-            <%-- todo add grade distribution display for previous editions of the module --%>
+            <c:if test="${moduleGrades != null}">
+                <h2>Grade Distribution</h2>
+                <%-- todo add grade distribution display for previous editions of the module --%>
+            </c:if>
         </div>
     </div>
     <div id="content_footer"></div>
