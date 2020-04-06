@@ -20,7 +20,7 @@
         <p class="error" align="center">${error}</p>
 
         <p class="success" align="center">${success}</p>
-
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input class="submit" type="submit" align="center" value="Login"/>
         <p class="register" align="center"><a href="register">No Account? Register here</a></p>
     </form>
