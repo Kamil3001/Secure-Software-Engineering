@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -28,7 +29,11 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}/unregister")
-    public String deleteStudent(@PathVariable(value = "id") Long studentId) throws StudentNotFoundException {
+    public String deleteStudent(@PathVariable(value = "id") Long studentId, HttpSession session) throws StudentNotFoundException {
+        if(!session.getAttribute("role").equals("student") || ((long) session.getAttribute("id")) != studentId){
+            return "redirect:/error";
+        }
+
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new StudentNotFoundException(studentId));
 
@@ -37,7 +42,11 @@ public class StudentController {
     }
 
     @RequestMapping("{id}/payFees")
-    public String updateFees(@PathVariable(value = "id") Long studentId) throws StudentNotFoundException {
+    public String updateFees(@PathVariable(value = "id") Long studentId, HttpSession session) throws StudentNotFoundException {
+        if(!session.getAttribute("role").equals("student") || ((long) session.getAttribute("id")) != studentId){
+            return "redirect:/error";
+        }
+
         Student student = studentRepository.findById(studentId)
                 .orElseThrow(() -> new StudentNotFoundException(studentId));
         student.setFeePaid(true);

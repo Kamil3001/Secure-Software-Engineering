@@ -34,12 +34,18 @@ public class WebController {
     ModuleService moduleService;
 
     @RequestMapping(value="/home")
-    public String showHomePage(ModelMap model){
+    public String showHomePage(ModelMap model, HttpSession session){
+        if(session.getAttribute("role") == null){
+            return "redirect:/error";
+        }
         return "home";
     }
 
     @RequestMapping(value="/view_modules")
-    public String showModulesPage(ModelMap model){
+    public String showModulesPage(ModelMap model, HttpSession session){
+        if(session.getAttribute("role") == null){
+            return "redirect:/error";
+        }
         model.addAttribute("all_modules", moduleService.retrieveAllModules());
         return "view_modules";
     }
@@ -55,12 +61,17 @@ public class WebController {
         else if (session.getAttribute("role").equals("staff")) {
             model.addAttribute("coordinator", myProfileService.retrieveCoordinator(userId));
             model.addAttribute("taught_modules", myProfileService.retrieveCoordinatorsModules(userId));
+        }else{
+            return "redirect:/error";
         }
         return "my_profile";
     }
 
     @RequestMapping(value="/statistics")
-    public String showStatisticsPage(ModelMap model){
+    public String showStatisticsPage(ModelMap model, HttpSession session){
+        if(session.getAttribute("role") == null){
+            return "redirect:/error";
+        }
         JSONObject nationalityData = getNationalityStatistics();
         JSONObject genderData = getGenderStatistics();
 
@@ -72,6 +83,10 @@ public class WebController {
 
     @RequestMapping(value="/module/{id}")
     public String showModulePage(HttpSession session, ModelMap model, @PathVariable(value = "id") long moduleId) throws ModuleNotFoundException, CoordinatorNotFoundException, StudentNotFoundException {
+        if(session.getAttribute("role") == null){
+            return "redirect:/error";
+        }
+
         model.addAttribute("module", moduleService.retrieveModuleById(moduleId));
         model.addAttribute("numEnrolled", moduleService.retrieveEnrolledCount(moduleId));
         model.addAttribute("coordinator", moduleService.retrieveCoordinator(moduleId));

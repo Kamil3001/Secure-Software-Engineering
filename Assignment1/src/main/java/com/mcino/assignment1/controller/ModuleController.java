@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -27,9 +28,18 @@ public class ModuleController {
 
     @PostMapping("/{id}/update")
     public String updateModuleDetails(@PathVariable(value = "id") Long moduleId,
-                                      @Valid @ModelAttribute("module") Module moduleDetails) throws ModuleNotFoundException {
+                                      @Valid @ModelAttribute("module") Module moduleDetails, HttpSession session) throws ModuleNotFoundException {
+
+        if(!session.getAttribute("role").equals("staff")){
+            return "redirect:/error";
+        }
+
         Module module = moduleRepository.findById(moduleId)
                 .orElseThrow(() -> new ModuleNotFoundException(moduleId));
+
+        if( ((long) session.getAttribute("id")) != module.getCoordinatorId()){
+            return "redirect:/error";
+        }
 
         // Only capacity, name and topics can be modified
         module.setCapacity(moduleDetails.getCapacity());
@@ -42,9 +52,17 @@ public class ModuleController {
     }
 
     @RequestMapping("/{id}/terminate")
-    public String terminateModule(@PathVariable(value = "id") Long moduleId) throws ModuleNotFoundException {
+    public String terminateModule(@PathVariable(value = "id") Long moduleId, HttpSession session) throws ModuleNotFoundException {
+        if(!session.getAttribute("role").equals("staff")){
+            return "redirect:/error";
+        }
+
         Module module = moduleRepository.findById(moduleId)
                 .orElseThrow(() -> new ModuleNotFoundException(moduleId));
+
+        if( ((long) session.getAttribute("id")) != module.getCoordinatorId()){
+            return "redirect:/error";
+        }
 
         module.setTerminated(true);
         moduleRepository.save(module);
@@ -53,8 +71,11 @@ public class ModuleController {
 
     @Transactional // needed EntityManager to get this working
     @RequestMapping("/{module_id}/enroll/{student_id}")
-    public String enrollToModule(@PathVariable(value = "module_id") Long moduleId, @PathVariable(value = "student_id") Long studentId) {
+    public String enrollToModule(@PathVariable(value = "module_id") Long moduleId, @PathVariable(value = "student_id") Long studentId, HttpSession session) {
         // to modify studentModule lists we need to modify the specific reference of Module hence EntityManager
+        if(!session.getAttribute("role").equals("student") || ((long) session.getAttribute("id") != studentId)){
+            return "redirect:/error";
+        }
         Module module = em.getReference(Module.class, moduleId);
         Student student = em.getReference(Student.class, studentId);
         module.addStudent(student);
