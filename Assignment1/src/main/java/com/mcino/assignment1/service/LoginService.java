@@ -7,6 +7,8 @@ import com.mcino.assignment1.repository.CoordinatorRepository;
 import com.mcino.assignment1.repository.CredentialsRepository;
 import com.mcino.assignment1.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,8 +24,13 @@ public class LoginService {
     CoordinatorRepository coordinatorRepository;
 
     public boolean validateUser(String username, String password){
-        Credential findCredentials = credentialsRepository.findByUsernameAndPassword(username, password);
-        return findCredentials != null;
+        Credential findCredentials = credentialsRepository.findByUsername(username);
+
+        if (findCredentials != null) {
+            System.out.println(findCredentials.getUsername() + " " + findCredentials.getPassword());
+            return BCrypt.checkpw(password, findCredentials.getPassword());
+        }
+        return false;
     }
 
     // Check if given credentials belong to a student

@@ -6,6 +6,7 @@ import com.mcino.assignment1.model.Student;
 import com.mcino.assignment1.repository.CredentialsRepository;
 import com.mcino.assignment1.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,6 +19,9 @@ public class RegistrationService {
 
     @Autowired
     CredentialsRepository credentialsRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public FormValidationInformation check(Student student){
 
@@ -86,6 +90,7 @@ public class RegistrationService {
         // All information is valid and registration can be completed
         fvi.setValid(true);
         fvi.setMessage("Registration successful");
+        student.getCredentials().setPassword(passwordEncoder.encode(student.getCredentials().getPassword()));
         return fvi;
 
     }
