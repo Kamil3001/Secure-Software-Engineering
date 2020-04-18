@@ -6,23 +6,23 @@
 <table class="profile-info">
     <tr>
         <th>Staff ID:</th>
-        <td>${coordinator.id}</td>
+        <td><c:out value = "${coordinator.id}"/></td>
     </tr>
     <tr>
         <th>Name:</th>
-        <td>${coordinator.name}</td>
+        <td><c:out value = "${coordinator.name}"/></td>
     </tr>
     <tr>
         <th>Surname:</th>
-        <td>${coordinator.surname}</td>
+        <td><c:out value = "${coordinator.surname}"/></td>
     </tr>
     <tr>
         <th>Nationality:</th>
-        <td>${coordinator.nationality}</td>
+        <td><c:out value = "${coordinator.nationality}"/></td>
     </tr>
     <tr>
         <th>Gender:</th>
-        <td>${coordinator.gender}</td>
+        <td><c:out value = "${coordinator.gender}"/></td>
     </tr>
 </table>
 <ul class="siswebstyle">

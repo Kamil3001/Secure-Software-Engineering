@@ -9,35 +9,35 @@
 <table class="profile-info">
     <tr>
         <th>Student ID:</th>
-        <td>${student.id}</td>
+        <td><c:out value = "${student.id}"/></td>
     </tr>
     <tr>
         <th>Name:</th>
-        <td>${student.name}</td>
+        <td><c:out value = "${student.name}"/></td>
     </tr>
     <tr>
         <th>Surname:</th>
-        <td>${student.surname}</td>
+        <td><c:out value = "${student.surname}"/></td>
     </tr>
     <tr>
         <th>Nationality:</th>
-        <td>${student.nationality}</td>
+        <td><c:out value = "${student.nationality}"/></td>
     </tr>
     <tr>
         <th>Gender:</th>
-        <td>${student.gender}</td>
+        <td><c:out value = "${student.gender}"/></td>
     </tr>
     <tr>
         <th>Address:</th>
-        <td>${student.address}</td>
+        <td><c:out value = "${student.address}"/></td>
     </tr>
     <tr>
         <th>Phone Number:</th>
-        <td>${student.phoneNum}</td>
+        <td><c:out value = "${student.phoneNum}"/></td>
     </tr>
     <tr>
         <th>E-mail:</th>
-        <td>${student.email}</td>
+        <td><c:out value = "${student.email}"/></td>
     </tr>
 </table>
 <ul class="siswebstyle">
