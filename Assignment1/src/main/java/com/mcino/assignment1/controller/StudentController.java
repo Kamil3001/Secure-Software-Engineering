@@ -28,8 +28,9 @@ public class StudentController {
         return studentRepository.save(student);
     }
 
-    @DeleteMapping("/{id}/unregister")
+    @RequestMapping("/{id}/unregister")
     public String deleteStudent(@PathVariable(value = "id") Long studentId, HttpSession session) throws StudentNotFoundException {
+
         if(!session.getAttribute("role").equals("student") || ((long) session.getAttribute("id")) != studentId){
             return "redirect:/error";
         }
