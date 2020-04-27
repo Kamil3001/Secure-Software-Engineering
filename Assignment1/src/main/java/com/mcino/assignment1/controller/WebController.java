@@ -8,21 +8,26 @@ import com.mcino.assignment1.exception.StudentNotFoundException;
 import com.mcino.assignment1.service.ModuleService;
 import com.mcino.assignment1.service.MyProfileService;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.support.SessionStatus;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class WebController {
+
+    private static final Logger log = LoggerFactory.getLogger(WebController.class);
 
     @PersistenceContext
     EntityManager em;
@@ -36,6 +41,7 @@ public class WebController {
     @RequestMapping(value="/home")
     public String showHomePage(ModelMap model, HttpSession session){
         if(session.getAttribute("role") == null){
+            log.error("Attempting to access the home page as a non-user");
             return "redirect:/error";
         }
         return "home";
@@ -44,6 +50,7 @@ public class WebController {
     @RequestMapping(value="/view_modules")
     public String showModulesPage(ModelMap model, HttpSession session){
         if(session.getAttribute("role") == null){
+            log.error("Attempting to view the modules page as a non-user");
             return "redirect:/error";
         }
         model.addAttribute("all_modules", moduleService.retrieveAllModules());
@@ -52,16 +59,18 @@ public class WebController {
 
     @RequestMapping(value="/my_profile")
     public String showMyProfilePage(HttpSession session, ModelMap model) throws StudentNotFoundException, CoordinatorNotFoundException {
-        long userId = (long) session.getAttribute("id");
-        if (session.getAttribute("role").equals("student")) {
+        if (session.getAttribute("role") != null && session.getAttribute("role").equals("student")) {
+            long userId = (long) session.getAttribute("id");
             model.addAttribute("student", myProfileService.retrieveStudent(userId));
             model.addAttribute("curr_modules", myProfileService.retrieveStudentsModules(userId));
             model.addAttribute("moduleGradeMap", myProfileService.retrieveTerminatedModules(userId));
         }
-        else if (session.getAttribute("role").equals("staff")) {
+        else if (session.getAttribute("role") != null && session.getAttribute("role").equals("staff")) {
+            long userId = (long) session.getAttribute("id");
             model.addAttribute("coordinator", myProfileService.retrieveCoordinator(userId));
             model.addAttribute("taught_modules", myProfileService.retrieveCoordinatorsModules(userId));
         }else{
+            log.error("Attempting to view My Profile page as a non-user");
             return "redirect:/error";
         }
         return "my_profile";
@@ -70,6 +79,7 @@ public class WebController {
     @RequestMapping(value="/statistics")
     public String showStatisticsPage(ModelMap model, HttpSession session){
         if(session.getAttribute("role") == null){
+            log.error("Attempting to view statistics as a non-user");
             return "redirect:/error";
         }
         JSONObject nationalityData = getNationalityStatistics();
@@ -77,13 +87,13 @@ public class WebController {
 
         model.addAttribute("nationality", nationalityData);
         model.addAttribute("gender", genderData);
-
         return "statistics";
     }
 
     @RequestMapping(value="/module/{id}")
     public String showModulePage(HttpSession session, ModelMap model, @PathVariable(value = "id") long moduleId) throws ModuleNotFoundException, CoordinatorNotFoundException, StudentNotFoundException {
         if(session.getAttribute("role") == null){
+            log.error("Attempting to view module page as a non-user");
             return "redirect:/error";
         }
 
