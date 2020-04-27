@@ -1,5 +1,6 @@
 package com.mcino.assignment1.controller;
 
+import com.mcino.assignment1.Utils.LogInjectionPrevention;
 import com.mcino.assignment1.model.Credential;
 import com.mcino.assignment1.service.LoginService;
 import org.slf4j.Logger;
@@ -42,7 +43,7 @@ public class LoginController {
 
         if(!isValid){
             model.put("error", "Invalid Credentials");
-            log.info("Incorrect login attempt using username: '{}'", c.getUsername());
+            log.info("Incorrect login attempt using username: '{}'", LogInjectionPrevention.makeSafe(c.getUsername()));
             return "login";
         }
         session.setAttribute("username", username);
@@ -58,7 +59,7 @@ public class LoginController {
             session.setAttribute("role", "staff");
             session.setAttribute("id", coordinatorId);
         }
-        log.info("Login successful for username: '{}'", c.getUsername());
+        log.info("Login successful for username: '{}'",  LogInjectionPrevention.makeSafe(c.getUsername()));
         return "redirect:home";
     }
 
@@ -68,7 +69,7 @@ public class LoginController {
         session.invalidate();
         SecurityContextHolder.getContext().setAuthentication(null);
         status.setComplete();
-        log.info("User '{}' logged out successfully.", username);
+        log.info("User '{}' logged out successfully.",  LogInjectionPrevention.makeSafe(username));
         return "redirect:/";
     }
 }
