@@ -27,5 +27,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/", "/login").permitAll()
                 .and()
                 .formLogin().loginPage("/login").permitAll();
+
+        http.sessionManagement().invalidSessionUrl("/");
     }
 }
