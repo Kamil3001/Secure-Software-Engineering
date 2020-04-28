@@ -362,3 +362,10 @@ Using generated security password: 38a64e68-c847-4c84-8c76-a379e8b4e1e3
 2020-04-28 00:55:05.304  INFO 29388 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
 2020-04-28 00:55:06.267  INFO 29388 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (https) with context path ''
 2020-04-28 00:55:06.269  INFO 29388 --- [main] c.m.assignment1.Assignment1Application   : Started Assignment1Application in 5.41 seconds (JVM running for 6.658)
+2020-04-28 00:55:27.463  INFO 29388 --- [https-jsse-nio-8081-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-28 00:55:27.463  INFO 29388 --- [https-jsse-nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-04-28 00:55:27.471  INFO 29388 --- [https-jsse-nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2020-04-28 00:55:27.958  WARN 29388 --- [https-jsse-nio-8081-exec-4] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [455] milliseconds.
+2020-04-28 00:55:52.746  INFO 29388 --- [https-jsse-nio-8081-exec-6] c.m.a.controller.LoginController         : Login successful for username: 'takinwale'
+2020-04-28 00:56:05.770  INFO 29388 --- [https-jsse-nio-8081-exec-2] c.m.a.controller.LoginController         : User 'takinwale' logged out successfully.
+2020-04-28 00:56:11.268 ERROR 29388 --- [https-jsse-nio-8081-exec-7] c.m.a.controller.WebController           : Attempting to view the modules page as a non-user
