@@ -2,10 +2,14 @@ package com.mcino.assignment1.controller;
 
 import com.mcino.assignment1.Utils.LogInjectionPrevention;
 import com.mcino.assignment1.model.Credential;
+import com.mcino.assignment1.service.LoginAttemptService;
 import com.mcino.assignment1.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.event.AbstractAuthenticationFailureEvent;
+import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 // Assignment 3 branch push
@@ -26,6 +33,9 @@ public class LoginController {
 
     @Autowired
     LoginService service;
+
+    @Autowired
+    LoginAttemptService loginAttemptService;
 
     @GetMapping(value="/")
     public String showLoginPage(){
@@ -39,11 +49,18 @@ public class LoginController {
         c.setUsername(username);
         c.setPassword(password);
 
+        String ip = getClientIP();
+        if(loginAttemptService.isBlacklisted(ip)){
+            model.put("error", "Blocked due to too many failed login attempts");
+            log.info("Repeated failed login attempts blacklisted IP: " + ip);
+            return "login";
+        }
         boolean isValid = service.validateUser(c.getUsername(), c.getPassword());
 
         if(!isValid){
             model.put("error", "Invalid Credentials");
             log.info("Incorrect login attempt using username: '{}'", LogInjectionPrevention.makeSafe(c.getUsername()));
+            loginAttemptService.loginFailed(ip);
             return "login";
         }
         session.setAttribute("username", username);
@@ -59,6 +76,8 @@ public class LoginController {
             session.setAttribute("role", "staff");
             session.setAttribute("id", coordinatorId);
         }
+
+        loginAttemptService.loginSucceeded(ip);
         log.info("Login successful for username: '{}'",  LogInjectionPrevention.makeSafe(c.getUsername()));
         return "redirect:home";
     }
@@ -71,5 +90,10 @@ public class LoginController {
         status.setComplete();
         log.info("User '{}' logged out successfully.",  LogInjectionPrevention.makeSafe(username));
         return "redirect:/";
+    }
+
+    private String getClientIP(){
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        return request.getRemoteAddr();
     }
 }
